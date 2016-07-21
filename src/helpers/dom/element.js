@@ -26,6 +26,20 @@ export function closest(element, nodes, until) {
   return null;
 }
 
+//TODO: docs
+export function closestBySelector(element, selector, untilSelector) {
+  while (element.nodeType === Node.ELEMENT_NODE && element != null && !element.matches(untilSelector)) {
+    if (element.matches(selector)) {
+      return element;
+
+    } else {
+      element = element.parentNode;
+    }
+  }
+
+  return null;
+}
+
 /**
  * Goes "down" the DOM tree (including given element) until it finds an element that matches the nodes or nodes name.
  *
@@ -168,7 +182,7 @@ export function index(element) {
 /**
  * Check if the provided overlay contains the provided element
  *
- * @param {String} overlay
+ * @param {String} overlayType
  * @param {HTMLElement} element
  * @returns {boolean}
  */

@@ -1,0 +1,48 @@
+.handsontable TBODY TH.manualRowMover,
+.handsontable TBODY TH.manualRowMover * {
+    cursor: move;
+    cursor: grab;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+}
+
+/*.handsontable .manualRowMover {*/
+    /*position: fixed;*/
+    /*left: -4px;*/
+    /*top: 0;*/
+    /*background-color: transparent;*/
+    /*height: 5px;*/
+    /*width: 50px;*/
+    /*z-index: 999;*/
+    /*cursor: move;*/
+    /*cursor: grab;*/
+    /*cursor: -webkit-grab;*/
+    /*cursor: -moz-grab;*/
+    /*display: none;*/
+/*}*/
+
+.handsontable .manualRowMoverGuideLine.active,
+.handsontable .manualRowMover.active {
+    display: block;
+}
+
+.handsontable .manualRowMoverGuideLine {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: #808080;
+    width: 25px;
+    height: 2px;
+    display: none;
+}
+
+/*.handsontable .manualRowMoverGuide.active {*/
+    /*display: block;*/
+    /*z-index: 199;*/
+/*}*/
+
+/*.handsontable .manualRowMover:hover,*/
+/*.handsontable .manualRowMover.active{*/
+    /*background-color: #88F;*/
+/*}*/
+

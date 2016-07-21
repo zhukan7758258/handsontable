@@ -1,10 +1,10 @@
 import BasePlugin from './../_base.js';
 import Handsontable from './../../browser';
-import {addClass, hasClass, removeClass, outerWidth} from './../../helpers/dom/element';
+import {addClass, hasClass, removeClass, outerWidth, outerHeight, closestBySelector, getScrollbarWidth} from './../../helpers/dom/element';
 import {arrayEach, arrayMap} from './../../helpers/array';
 import {rangeEach} from './../../helpers/number';
 import {eventManager as eventManagerObject} from './../../eventManager';
-import {pageY} from './../../helpers/dom/event';
+import {pageY, stopImmediatePropagation} from './../../helpers/dom/event';
 import {registerPlugin} from './../../plugins';
 
 const privatePool = new WeakMap();
@@ -16,7 +16,7 @@ const privatePool = new WeakMap();
  * - handle - the draggable element that sets the desired position of the row
  * - guide - the helper guide that shows the desired position as a horizontal guide
  *
- * Warning! Whenever you make a change in this file, make an analogous change in manualRowMove.js
+ * Warning! Whenever you make a change in this file, make an analogous change in manualColumnMove.js
  *
  * @class ManualRowMove
  * @plugin ManualRowMove
@@ -28,33 +28,53 @@ class ManualRowMove extends BasePlugin {
     privatePool.set(this, {
       guideClassName: 'manualRowMoverGuide',
       handleClassName: 'manualRowMover',
+      guideLineClassName: 'manualRowMoverGuideLine',
+      headerClassNames: {},
       startOffset: null,
       pressed: null,
       startRow: null,
       endRow: null,
-      currentRow: null,
+      initialRow: null,
       startX: null,
       startY: null
     });
 
     /**
-     * DOM element representing the horizontal guide line.
+     * DOM element representing the horizontal guide block.
      *
      * @type {HTMLElement}
      */
     this.guideElement = null;
     /**
-     * DOM element representing the move handle.
+     * DOM element representing the horizontal guide line.
      *
      * @type {HTMLElement}
      */
-    this.handleElement = null;
+    this.guideLine = null;
+    // /**
+    //  * DOM element representing the move handle.
+    //  *
+    //  * @type {HTMLElement}
+    //  */
+    // this.handleElement = null;
     /**
      * Currently processed TH element.
      *
      * @type {HTMLElement}
      */
     this.currentTH = null;
+    /**
+     * Currently processed row.
+     *
+     * @type {Number}
+     */
+    this.initialRow = null;
+    /**
+     * Number of selected rows.
+     *
+     * @type {Number}
+     */
+    this.thAmount = null;
     /**
      * Manual column positions array.
      *
@@ -86,11 +106,19 @@ class ManualRowMove extends BasePlugin {
     let initialSettings = this.hot.getSettings().manualRowMove;
     let loadedManualRowPositions = this.loadManualRowPositions();
 
-    this.handleElement = document.createElement('DIV');
-    this.handleElement.className = priv.handleClassName;
+    // this.handleElement = document.createElement('DIV');
+    // this.handleElement.className = priv.handleClassName;
 
     this.guideElement = document.createElement('DIV');
     this.guideElement.className = priv.guideClassName;
+
+    this.guideLine = document.createElement('DIV');
+    this.guideLine.className = priv.guideLineClassName;
+
+    this.addHook('afterSelection', (fromRow, fromCol, toRow, toCol) => this.onAfterSelection(fromRow, fromCol, toRow, toCol));
+    this.addHook('beforeOnCellMouseOver', (event, coords, TD, blockCalculations) => this.onBeforeOnCellMouseOver(event, coords, TD, blockCalculations));
+    this.addHook('beforeOnCellMouseDown', (event, coords, TD) => this.onBeforeOnCellMouseDown(event, coords, TD));
+    this.addHook('afterGetRowHeader', (row, TH) => this.onAfterGetRowHeader(row, TH));
 
     this.addHook('modifyRow', (row) => this.onModifyRow(row));
     this.addHook('afterRemoveRow', (index, amount) => this.onAfterRemoveRow(index, amount));
@@ -143,7 +171,7 @@ class ManualRowMove extends BasePlugin {
    */
   registerEvents() {
     this.eventManager.addEventListener(this.hot.rootElement, 'mouseover', (event) => this.onMouseOver(event));
-    this.eventManager.addEventListener(this.hot.rootElement, 'mousedown', (event) => this.onMouseDown(event));
+    // this.eventManager.addEventListener(this.hot.rootElement, 'mousedown', (event) => this.onMouseDown(event));
     this.eventManager.addEventListener(window, 'mousemove', (event) => this.onMouseMove(event));
     this.eventManager.addEventListener(window, 'mouseup', (event) => this.onMouseUp(event));
   }
@@ -194,45 +222,47 @@ class ManualRowMove extends BasePlugin {
     });
   }
 
-  /**
-   * Setup the moving handle position.
-   *
-   * @param {HTMLElement} TH Currently processed TH element.
-   */
-  setupHandlePosition(TH) {
-    this.currentTH = TH;
-    let priv = privatePool.get(this);
-    let row = this.hot.view.wt.wtTable.getCoords(TH).row; // getCoords returns WalkontableCellCoords
-    let headerWidth = outerWidth(this.currentTH);
+  // /**
+  //  * Setup the moving handle position.
+  //  *
+  //  * @param {HTMLElement} TH Currently processed TH element.
+  //  */
+  // setupHandlePosition(TH) {
+  //   this.currentTH = TH;
+  //   let priv = privatePool.get(this);
+  //   let row = this.hot.view.wt.wtTable.getCoords(TH).row; // getCoords returns WalkontableCellCoords
+  //   let headerWidth = outerWidth(this.currentTH);
+  //   let headerHeight = outerHeight(this.currentTH);
+  //
+  //   if (row >= 0) { // if not row header
+  //     let box = this.currentTH.getBoundingClientRect();
+  //     priv.initialRow = row;
+  //
+  //     priv.startOffset = box.top;
+  //     this.handleElement.style.top = priv.startOffset + 'px';
+  //     this.handleElement.style.left = box.left + 'px';
+  //     this.handleElement.style.width = headerWidth + 'px';
+  //     this.handleElement.style.height = headerHeight + 'px';
+  //     this.hot.rootElement.appendChild(this.handleElement);
+  //   }
+  // }
 
-    if (row >= 0) { // if not row header
-      let box = this.currentTH.getBoundingClientRect();
-      priv.currentRow = row;
-
-      priv.startOffset = box.top;
-      this.handleElement.style.top = priv.startOffset + 'px';
-      this.handleElement.style.left = box.left + 'px';
-      this.handleElement.style.width = headerWidth + 'px';
-      this.hot.rootElement.appendChild(this.handleElement);
-    }
-  }
-
-  /**
-   * Refresh the moving handle position.
-   *
-   * @param {HTMLElement} TH TH element with the handle.
-   * @param {Number} delta Difference between the related rows.
-   */
-  refreshHandlePosition(TH, delta) {
-    let box = TH.getBoundingClientRect();
-    let handleHeight = 6;
-
-    if (delta > 0) {
-      this.handleElement.style.top = (box.top + box.height - handleHeight) + 'px';
-    } else {
-      this.handleElement.style.top = box.top + 'px';
-    }
-  }
+  // /**
+  //  * Refresh the moving handle position.
+  //  *
+  //  * @param {HTMLElement} TH TH element with the handle.
+  //  * @param {Number} delta Difference between the related rows.
+  //  */
+  // refreshHandlePosition(TH, delta) {
+  //   let box = TH.getBoundingClientRect();
+  //   let handleHeight = 6;
+  //
+  //   if (delta > 0) {
+  //     this.handleElement.style.top = (box.top + box.height - handleHeight) + 'px';
+  //   } else {
+  //     this.handleElement.style.top = box.top + 'px';
+  //   }
+  // }
 
   /**
    * Setup the moving handle position.
@@ -240,18 +270,50 @@ class ManualRowMove extends BasePlugin {
   setupGuidePosition() {
     let box = this.currentTH.getBoundingClientRect();
     let priv = privatePool.get(this);
-    let handleWidth = parseInt(outerWidth(this.handleElement), 10);
-    let handleRightPosition = parseInt(this.handleElement.style.left, 10) + handleWidth;
+    // let handleWidth = parseInt(outerWidth(this.handleElement), 10);
+    // let handleRightPosition = parseInt(this.handleElement.style.left, 10) + handleWidth;
     let maximumVisibleElementWidth = parseInt(this.hot.view.maximumVisibleElementWidth(0), 10);
+    const scrollbarWidth = getScrollbarWidth();
 
-    addClass(this.handleElement, 'active');
+    // addClass(this.handleElement, 'active');
     addClass(this.guideElement, 'active');
 
     this.guideElement.style.height = box.height + 'px';
-    this.guideElement.style.width = (maximumVisibleElementWidth - handleWidth) + 'px';
+    // this.guideElement.style.width = (maximumVisibleElementWidth - handleWidth) + 'px';
+    this.guideElement.style.width = (maximumVisibleElementWidth - box.width - scrollbarWidth) + 'px';
     this.guideElement.style.top = priv.startOffset + 'px';
-    this.guideElement.style.left = handleRightPosition + 'px';
+    // this.guideElement.style.left = handleRightPosition + 'px';
+    this.guideElement.style.left = box.right + 'px';
     this.hot.rootElement.appendChild(this.guideElement);
+  }
+
+  //TODO: docs
+  setupGuideLinePosition() {
+    const box = this.currentTH.getBoundingClientRect();
+    const priv = privatePool.get(this);
+    const maximumVisibleElementWidth = parseInt(this.hot.view.maximumVisibleElementWidth(0), 10);
+    const scrollbarWidth = getScrollbarWidth();
+
+    addClass(this.guideLine, 'active');
+
+    this.guideLine.style.width = (maximumVisibleElementWidth - box.width - scrollbarWidth) + 'px';
+    this.guideLine.style.top = priv.startOffset + 'px';
+    this.guideLine.style.left = box.right + 'px';
+
+    this.hot.rootElement.appendChild(this.guideLine);
+  }
+
+  //TODO: docs
+  refreshGuideLinePosition(TH, delta) {
+    let box = TH.getBoundingClientRect();
+
+    addClass(this.guideLine, 'active');
+
+    if (delta > 0) {
+      this.guideLine.style.top = (box.top + box.height) + 'px';
+    } else {
+      this.guideLine.style.top = box.top + 'px';
+    }
   }
 
   /**
@@ -262,15 +324,17 @@ class ManualRowMove extends BasePlugin {
   refreshGuidePosition(diff) {
     let priv = privatePool.get(this);
 
+    // this.guideElement.style.display = 'block';
     this.guideElement.style.top = priv.startOffset + diff + 'px';
   }
 
   /**
    * Hide both the moving handle and the moving guide.
    */
-  hideHandleAndGuide() {
-    removeClass(this.handleElement, 'active');
+  hideHandleAndGuides() {
+    // removeClass(this.handleElement, 'active');
     removeClass(this.guideElement, 'active');
+    removeClass(this.guideLine, 'active');
   }
 
   /**
@@ -280,7 +344,7 @@ class ManualRowMove extends BasePlugin {
    * @returns {Boolean}
    */
   checkRowHeader(element) {
-    if (element != this.hot.rootElement) {
+    if (element.tagName !== 'TD' && element != this.hot.rootElement) {
       let parent = element.parentNode;
 
       if (parent.tagName === 'TBODY') {
@@ -364,6 +428,92 @@ class ManualRowMove extends BasePlugin {
     return this.rowPositions[row];
   }
 
+  //TODO: docs
+  addRowToSelected(row) {
+    this.amount++;
+  }
+
+  //TODO: docs
+  clearSelected() {
+    this.currentTH = null;
+    this.initialRow = null;
+    this.amount = 1;
+  }
+
+  /**
+   * TODO:docs
+   *
+   * @private
+   * @param row
+   */
+  markRowAsMovable(row) {
+    let priv = privatePool.get(this);
+
+    this.clearMovableRows();
+    priv.headerClassNames[row] = priv.handleClassName;
+
+    // addClass(TH, priv.headerClassNames[row]);
+  }
+
+  markRowsAsMovable(rows) {
+    let priv = privatePool.get(this);
+
+    this.clearMovableRows();
+
+    arrayEach(rows, (elem, i) => {
+      priv.headerClassNames[elem] = priv.handleClassName;
+    });
+  }
+
+  clearMovableRows() {
+    let priv = privatePool.get(this);
+
+    priv.headerClassNames = {};
+  }
+
+  /**
+   * TODO:docs
+   *
+   * @private
+   * @param row
+   * @param TH
+   */
+  markRowAsNonMovable(row, TH) {
+    let priv = privatePool.get(this);
+
+    removeClass(TH, priv.handleClassName);
+  }
+
+  /**
+   * TODO: docs
+   *
+   * @private
+   * @param row
+   * @param TH
+   */
+  startDrag(row, TH, event) {
+    let priv = privatePool.get(this);
+
+    priv.pressed = this.hot;
+    this.currentTH = TH;
+
+    let box = this.currentTH.getBoundingClientRect();
+
+    priv.startOffset = box.top;
+    priv.startRow = row;
+    priv.startY = pageY(event);
+  }
+
+
+
+
+
+
+
+
+
+
+
   /**
    * 'mouseover' event callback.
    *
@@ -379,33 +529,40 @@ class ManualRowMove extends BasePlugin {
       if (th) {
         if (priv.pressed) {
           priv.endRow = this.hot.view.wt.wtTable.getCoords(th).row;
-          this.refreshHandlePosition(th, priv.endRow - priv.startRow);
+          // this.refreshHandlePosition(th, priv.endRow - priv.startRow);
+          this.refreshGuideLinePosition(th, priv.endRow - priv.startRow);
 
-        } else {
-          this.setupHandlePosition(th);
         }
+        // else {
+        //
+        //   this.addRowToSelected(row);
+        //
+        //   // this.setupHandlePosition(th);
+        // }
       }
     }
   }
 
-  /**
-   * 'mousedown' event callback.
-   *
-   * @private
-   * @param {MouseEvent} event The event object.
-   */
-  onMouseDown(event) {
-    let priv = privatePool.get(this);
-
-    if (hasClass(event.target, priv.handleClassName)) {
-      priv.startY = pageY(event);
-      this.setupGuidePosition();
-
-      priv.pressed = this.hot;
-      priv.startRow = priv.currentRow;
-      priv.endRow = priv.currentRow;
-    }
-  }
+  // /**
+  //  * 'mousedown' event callback.
+  //  *
+  //  * @private
+  //  * @param {MouseEvent} event The event object.
+  //  */
+  // onMouseDown(event) {
+  //   const priv = privatePool.get(this);
+  //   const header = closestBySelector(event.target, 'TH', 'TABLE');
+  //
+  //   if (header && hasClass(header, priv.handleClassName)) {
+  //     priv.startY = pageY(event);
+  //     this.setupGuidePosition();
+  //     this.setupGuideLinePosition();
+  //
+  //     priv.pressed = this.hot;
+  //     priv.startRow = priv.initialRow;
+  //     priv.endRow = priv.initialRow;
+  //   }
+  // }
 
   /**
    * 'mousemove' event callback.
@@ -417,6 +574,7 @@ class ManualRowMove extends BasePlugin {
     let priv = privatePool.get(this);
 
     if (priv.pressed) {
+      // this.refreshGuidePosition(pageY(event) - priv.startY);
       this.refreshGuidePosition(pageY(event) - priv.startY);
     }
   }
@@ -431,7 +589,7 @@ class ManualRowMove extends BasePlugin {
     let priv = privatePool.get(this);
 
     if (priv.pressed) {
-      this.hideHandleAndGuide();
+      this.hideHandleAndGuides();
       priv.pressed = false;
 
       this.createPositionData(this.hot.countRows());
@@ -446,7 +604,30 @@ class ManualRowMove extends BasePlugin {
 
       Handsontable.hooks.run(this.hot, 'afterRowMove', priv.startRow, priv.endRow);
 
-      this.setupHandlePosition(this.currentTH);
+      // this.setupHandlePosition(this.currentTH);
+
+    } else {
+      const selected = this.hot.getSelected();
+
+      // if (!selected || coords.row < selected[0] || coords.row > selected[2] || selected[1] !== 0 || selected[3] !== this.hot.countCols() - 1) {
+      //
+      //   if (this.initialRow) {
+      //     rangeEach(this.initialRow, this.initialRow + this.amount - 1, (i) => {
+      //       removeClass(this.hot.getCell(i, -1, true), priv.handleClassName);
+      //     });
+      //   }
+      //
+      //   this.markRowAsMovable(coords.row, TD);
+      // }
+
+      // if (selected && selected[1] === 0 && selected[3] === this.hot.countCols() - 1) {
+      //   this.amount = selected[2] - selected[0] + 1;
+      // }
+      //
+      // rangeEach(this.initialRow, this.initialRow + this.amount - 1, (i) => {
+      //   this.markRowAsMovable(i, this.hot.getCell(i, -1, true));
+      // });
+
     }
   }
 
@@ -533,6 +714,91 @@ class ManualRowMove extends BasePlugin {
     }
 
     this.rowPositions = rowpos;
+  }
+
+  //TODO:docs
+  onBeforeOnCellMouseOver(event, coords, TD, blockCalculations) {
+    let priv = privatePool.get(this);
+
+    if (!priv.pressed) {
+      return true;
+    }
+
+    stopImmediatePropagation(event);
+  }
+
+  //TODO: docs
+  onBeforeOnCellMouseDown(event, coords, TD) {
+    const priv = privatePool.get(this);
+
+    //   const priv = privatePool.get(this);
+    //   const header = closestBySelector(event.target, 'TH', 'TABLE');
+    //
+    //   if (header && hasClass(header, priv.handleClassName)) {
+    //     priv.startY = pageY(event);
+
+    //     this.setupGuideLinePosition();
+    //
+    //     priv.pressed = this.hot;
+    //     priv.startRow = priv.initialRow;
+    //     priv.endRow = priv.initialRow;
+    //   }
+
+    if (coords.col > -1) {
+      this.amount = 0;
+      this.initialRow = null;
+
+      return;
+    }
+
+    if (hasClass(TD, priv.handleClassName)) {
+      stopImmediatePropagation(event);
+
+      const selected = this.hot.getSelected();
+
+      this.initialRow = selected[0];
+      this.amount = selected[2] - selected[0];
+
+      this.startDrag(selected[0], TD, event);
+
+      this.setupGuidePosition();
+      this.setupGuideLinePosition();
+    }
+  }
+
+  //TODO:docs
+  onAfterGetRowHeader(row, TH) {
+    let priv = privatePool.get(this);
+
+    if (!hasClass(TH, priv.headerClassNames[row])) {
+      addClass(TH, priv.headerClassNames[row]);
+    }
+  }
+
+  //TODO: docs
+  onAfterSelection(fromRow, fromCol, toRow, toCol) {
+    let priv = privatePool.get(this);
+
+    if (fromCol === 0 && toCol === this.hot.countCols() - 1) {
+      let selectedRows = [];
+
+      rangeEach(fromRow, toRow, (i) => {
+        selectedRows.push(i);
+      });
+
+      this.markRowsAsMovable(selectedRows);
+
+      // TODO: refactor?
+      this.hot.render();
+
+    } else {
+      if (Object.keys(priv.headerClassNames).length) {
+        this.clearMovableRows();
+
+        // TODO: refactor?
+        this.hot.render();
+      }
+    }
   }
 
   /**

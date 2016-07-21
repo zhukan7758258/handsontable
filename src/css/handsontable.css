@@ -164,6 +164,8 @@
 
 /* plugins */
 
+
+
 .handsontable .manualColumnMover {
   position: fixed;
   left: 0;
@@ -171,17 +173,6 @@
   background-color: transparent;
   width: 5px;
   height: 25px;
-  z-index: 999;
-  cursor: move;
-}
-
-.handsontable .manualRowMover {
-  position: fixed;
-  left: -4px;
-  top: 0;
-  background-color: transparent;
-  height: 5px;
-  width: 50px;
   z-index: 999;
   cursor: move;
 }
@@ -208,7 +199,15 @@
 .handsontable .manualColumnMover.active,
 .handsontable .manualRowMover:hover,
 .handsontable .manualRowMover.active{
-  background-color: #88F;
+  /*background-color: #88F;*/
+
+}
+
+.handsontable .manualColumnMover.active {
+/*.handsontable .manualRowMover.active {*/
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
 }
 
 /* row + column resizer*/
