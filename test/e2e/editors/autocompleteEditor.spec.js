@@ -2512,7 +2512,7 @@ describe('AutocompleteEditor', () => {
   });
 
   it('should add a scrollbar to the autocomplete dropdown, only if number of displayed choices exceeds 10', function(done) {
-    var hot = handsontable({
+    const hot = handsontable({
       data: [
         ['', 'two', 'three'],
         ['four', 'five', 'six']
@@ -2538,25 +2538,12 @@ describe('AutocompleteEditor', () => {
     selectCell(0, 0);
     $(getCell(0, 0)).find('.htAutocompleteArrow').simulate('mousedown');
 
-    var dropdown = hot.getActiveEditor().htContainer;
-    var dropdownHolder = hot.getActiveEditor().htEditor.view.wt.wtTable.holder;
+    const dropdownHolder = hot.getActiveEditor().htEditor.view.wt.wtTable.holder;
 
     setTimeout(() => {
       expect(dropdownHolder.scrollHeight).toBeGreaterThan(dropdownHolder.clientHeight);
-
-      keyDownUp('esc');
-
-      hot.getSettings().columns[0].source = hot.getSettings().columns[0].source.slice(0).splice(3);
-      hot.updateSettings({});
-
-      selectCell(0, 0);
-      $(getCell(0, 0)).find('.htAutocompleteArrow').simulate('mousedown');
-    }, 30);
-
-    setTimeout(() => {
-      expect(dropdownHolder.scrollHeight > dropdownHolder.clientHeight).toBe(false);
       done();
-    }, 60);
+    }, 30);
   });
 
   it('should not close editor on scrolling', (done) => {

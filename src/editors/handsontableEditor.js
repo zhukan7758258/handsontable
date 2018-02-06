@@ -114,12 +114,11 @@ HandsontableEditor.prototype.open = function() {
 
   TextEditor.prototype.open.apply(this, arguments);
 
-  if (this.htEditor) {
-    this.htEditor.destroy();
+  if (!this.htEditor) {
+    // Construct and initialise a new Handsontable
+    this.htEditor = new this.instance.constructor(this.htContainer, this.htOptions);
+    this.htEditor.init();
   }
-  // Construct and initialise a new Handsontable
-  this.htEditor = new this.instance.constructor(this.htContainer, this.htOptions);
-  this.htEditor.init();
 
   if (this.cellProperties.strict) {
     this.htEditor.selectCell(0, 0);
