@@ -23,8 +23,8 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
- * Version: 3.0.0
- * Release date: 16/05/2018 (built at 09/05/2018 15:18:34)
+ * Version: 4.0.0
+ * Release date: 13/06/2018 (built at 06/06/2018 13:42:57)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -35,7 +35,7 @@
 		exports["Handsontable"] = factory(require("moment"), require("numbro"), require("pikaday"));
 	else
 		root["Handsontable"] = factory(root["moment"], root["numbro"], root["Pikaday"]);
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_56__, __WEBPACK_EXTERNAL_MODULE_247__, __WEBPACK_EXTERNAL_MODULE_236__) {
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_57__, __WEBPACK_EXTERNAL_MODULE_247__, __WEBPACK_EXTERNAL_MODULE_236__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -1954,7 +1954,7 @@ var _viewportRows = __webpack_require__(177);
 
 var _viewportRows2 = _interopRequireDefault(_viewportRows);
 
-var _coords = __webpack_require__(55);
+var _coords = __webpack_require__(56);
 
 var _coords2 = _interopRequireDefault(_coords);
 
@@ -2948,7 +2948,7 @@ exports.isEmpty = isEmpty;
 exports.isRegExp = isRegExp;
 exports._injectProductInfo = _injectProductInfo;
 
-var _moment = __webpack_require__(56);
+var _moment = __webpack_require__(57);
 
 var _moment2 = _interopRequireDefault(_moment);
 
@@ -3063,7 +3063,7 @@ function _injectProductInfo(key, element) {
 
   if (trial || schemaValidity) {
     if (schemaValidity) {
-      var releaseTime = Math.floor((0, _moment2.default)('16/05/2018', 'DD/MM/YYYY').toDate().getTime() / 8.64e7);
+      var releaseTime = Math.floor((0, _moment2.default)('13/06/2018', 'DD/MM/YYYY').toDate().getTime() / 8.64e7);
       var keyGenTime = _extractTime(key);
 
       if (keyGenTime > 45000 || keyGenTime !== parseInt(keyGenTime, 10)) {
@@ -3124,7 +3124,7 @@ function _checkKeySchema(v) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var store = __webpack_require__(77)('wks');
-var uid = __webpack_require__(49);
+var uid = __webpack_require__(50);
 var Symbol = __webpack_require__(15).Symbol;
 var USE_SYMBOL = typeof Symbol == 'function';
 
@@ -4349,22 +4349,21 @@ var REGISTERED_HOOKS = [
  *
  * @event Hooks#beforeColumnSort
  * @param {Number} column Sorted visual column index.
- * @param {Boolean} order Soring order where:
- *  * `true` means ascending order,
- *  * `false` means descending order,
- *  * `undefined` means original order.
+ * @param {String} order Soring order where:
+ *  * `asc` means ascending order,
+ *  * `desc` means descending order,
+ *  * `none` means original order.
  */
 'beforeColumnSort',
-
 /**
  * Fired after sorting the column.
  *
  * @event Hooks#afterColumnSort
  * @param {Number} column Sorted visual column index.
- * @param {Boolean} order Soring order where:
- *  * `true` means ascending order
- *  * `false` means descending order
- *  * `undefined` means original order
+ * @param {String} order Soring order where:
+ *  * `asc` means ascending order
+ *  * `desc` means descending order
+ *  * `none` means original order
  */
 'afterColumnSort',
 
@@ -4554,17 +4553,22 @@ var REGISTERED_HOOKS = [
  * Fired before change order of the visual indexes.
  *
  * @event Hooks#beforeRowMove
- * @param {Array} rows Array of visual row indexes to be moved.
- * @param {Number} target Visual row index being a target for moved rows.
+ * @param {Array} movedRows Array of visual row indexes to be moved.
+ * @param {Number} finalIndex Visual row index, being a start index for the moved rows. Points to where the elements will be placed after the moving action. To check visualization of final index please take a look at [documentation](/demo-moving.html#manualRowMove).
+ * @param {Number|undefined} dropIndex Visual row index, being a drop index for the moved rows. Points to where we are going to drop the moved elements. To check visualization of drop index please take a look at [documentation](/demo-moving.html#manualRowMove). It's `undefined` when `dragRows` function wasn't called.
+ * @param {Boolean} movePossible Indicates if it's possible to move rows to the desired position.
  */
 'beforeRowMove',
 
 /**
- * Fired after change order of the visual indexes.
+ * Fired after changing the order of the visual indexes.
  *
  * @event Hooks#afterRowMove
- * @param {Array} rows Array of visual row indexes that were moved.
- * @param {Number} target Visual row index being a target for moved rows.
+ * @param {Array} movedRows Array of visual row indexes to be moved.
+ * @param {Number} finalIndex Visual row index, being a start index for the moved rows. Points to where the elements will be placed after the moving action. To check visualization of final index please take a look at [documentation](/demo-moving.html#manualRowMove).
+ * @param {Number|undefined} dropIndex Visual row index, being a drop index for the moved rows. Points to where we are going to drop the moved elements. To check visualization of drop index please take a look at [documentation](/demo-moving.html#manualRowMove). It's `undefined` when `dragRows` function wasn't called.
+ * @param {Boolean} movePossible Indicates if it was possible to move rows to the desired position.
+ * @param {Boolean} orderChanged Indicates if order of rows was changed by move.
  */
 'afterRowMove',
 
@@ -5414,7 +5418,7 @@ var _pluginHooks = __webpack_require__(16);
 
 var _pluginHooks2 = _interopRequireDefault(_pluginHooks);
 
-var _baseEditor = __webpack_require__(54);
+var _baseEditor = __webpack_require__(55);
 
 var _baseEditor2 = _interopRequireDefault(_baseEditor);
 
@@ -5450,7 +5454,7 @@ var _selectEditor = __webpack_require__(241);
 
 var _selectEditor2 = _interopRequireDefault(_selectEditor);
 
-var _textEditor = __webpack_require__(58);
+var _textEditor = __webpack_require__(59);
 
 var _textEditor2 = _interopRequireDefault(_textEditor);
 
@@ -5496,7 +5500,7 @@ function RegisteredEditor(editorClass) {
   };
 
   _pluginHooks2.default.getSingleton().add('afterDestroy', function () {
-    instances = {};
+    instances[this.guid] = null;
   });
 }
 
@@ -6030,42 +6034,103 @@ module.exports = function (KEY, exec) {
 
 
 exports.__esModule = true;
+exports.setBrowserMeta = setBrowserMeta;
+exports.isChrome = isChrome;
+exports.isEdge = isEdge;
+exports.isIE = isIE;
 exports.isIE8 = isIE8;
 exports.isIE9 = isIE9;
-exports.isSafari = isSafari;
-exports.isChrome = isChrome;
+exports.isMSBrowser = isMSBrowser;
 exports.isMobileBrowser = isMobileBrowser;
-var _isIE8 = !document.createTextNode('test').textContent;
+exports.isSafari = isSafari;
 
-function isIE8() {
-  return _isIE8;
+var _object = __webpack_require__(2);
+
+var tester = function tester(_tester) {
+  var result = {
+    value: false
+  };
+  result.test = function (ua, vendor) {
+    result.value = _tester(ua, vendor);
+  };
+
+  return result;
+};
+
+var browsers = {
+  chrome: tester(function (ua, vendor) {
+    return (/Chrome/.test(ua) && /Google/.test(vendor)
+    );
+  }),
+  edge: tester(function (ua) {
+    return (/Edge/.test(ua)
+    );
+  }),
+  ie: tester(function (ua) {
+    return (/Trident/.test(ua)
+    );
+  }),
+  ie8: tester(function () {
+    return !document.createTextNode('test').textContent;
+  }),
+  ie9: tester(function () {
+    return !!document.documentMode;
+  }),
+  mobile: tester(function (ua) {
+    return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua)
+    );
+  }),
+  safari: tester(function (ua, vendor) {
+    return (/Safari/.test(ua) && /Apple Computer/.test(vendor)
+    );
+  })
+};
+
+function setBrowserMeta() {
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      _ref$userAgent = _ref.userAgent,
+      userAgent = _ref$userAgent === undefined ? navigator.userAgent : _ref$userAgent,
+      _ref$vendor = _ref.vendor,
+      vendor = _ref$vendor === undefined ? navigator.vendor : _ref$vendor;
+
+  (0, _object.objectEach)(browsers, function (_ref2) {
+    var test = _ref2.test;
+    return void test(userAgent, vendor);
+  });
 }
 
-var _isIE9 = !!document.documentMode;
-
-function isIE9() {
-  return _isIE9;
-}
-
-var _isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
-
-function isSafari() {
-  return _isSafari;
-}
-
-var _isChrome = /Chrome/.test(navigator.userAgent) && /Google/.test(navigator.vendor);
+setBrowserMeta();
 
 function isChrome() {
-  return _isChrome;
+  return browsers.chrome.value;
 }
 
-function isMobileBrowser(userAgent) {
-  if (!userAgent) {
-    userAgent = navigator.userAgent;
-  }
+function isEdge() {
+  return browsers.edge.value;
+}
 
-  return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)
-  );
+function isIE() {
+  return browsers.ie.value;
+}
+
+function isIE8() {
+  return browsers.ie8.value;
+}
+
+function isIE9() {
+  return browsers.ie9.value;
+}
+
+function isMSBrowser() {
+  return browsers.ie.value || browsers.edge.value;
+}
+
+function isMobileBrowser() {
+  return browsers.mobile.value;
+}
+
+function isSafari() {
+  return browsers.safari.value;
 }
 
 /***/ }),
@@ -6152,7 +6217,7 @@ module.exports = function (it, key) {
 var global = __webpack_require__(15);
 var hide = __webpack_require__(31);
 var has = __webpack_require__(29);
-var SRC = __webpack_require__(49)('src');
+var SRC = __webpack_require__(50)('src');
 var TO_STRING = 'toString';
 var $toString = Function[TO_STRING];
 var TPL = ('' + $toString).split(TO_STRING);
@@ -6187,7 +6252,7 @@ __webpack_require__(39).inspectSource = function (it) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP = __webpack_require__(20);
-var createDesc = __webpack_require__(50);
+var createDesc = __webpack_require__(51);
 module.exports = __webpack_require__(22) ? function (object, key, value) {
   return dP.f(object, key, createDesc(1, value));
 } : function (object, key, value) {
@@ -6237,7 +6302,7 @@ module.exports = function (it) {
 /* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var META = __webpack_require__(49)('meta');
+var META = __webpack_require__(50)('meta');
 var isObject = __webpack_require__(9);
 var has = __webpack_require__(29);
 var setDesc = __webpack_require__(20).f;
@@ -6789,7 +6854,7 @@ module.exports = function (it) {
 /* 39 */
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.5.6' };
+var core = module.exports = { version: '2.5.7' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
@@ -7382,6 +7447,89 @@ module.exports = function (key) {
 
 
 exports.__esModule = true;
+
+var _array = __webpack_require__(1);
+
+var _object = __webpack_require__(2);
+
+var MIXIN_NAME = 'localHooks';
+
+/**
+ * Mixin object to extend objects functionality for local hooks.
+ *
+ * @type {Object}
+ */
+var localHooks = {
+  /**
+   * Internal hooks storage.
+   */
+  _localHooks: Object.create(null),
+
+  /**
+   * Add hook to the collection.
+   *
+   * @param {String} key Hook name.
+   * @param {Function} callback Hook callback
+   * @returns {Object}
+   */
+  addLocalHook: function addLocalHook(key, callback) {
+    if (!this._localHooks[key]) {
+      this._localHooks[key] = [];
+    }
+    this._localHooks[key].push(callback);
+
+    return this;
+  },
+
+
+  /**
+   * Run hooks.
+   *
+   * @param {String} key Hook name.
+   * @param {*} params
+   */
+  runLocalHooks: function runLocalHooks(key) {
+    var _this = this;
+
+    for (var _len = arguments.length, params = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      params[_key - 1] = arguments[_key];
+    }
+
+    if (this._localHooks[key]) {
+      (0, _array.arrayEach)(this._localHooks[key], function (callback) {
+        return callback.apply(_this, params);
+      });
+    }
+  },
+
+
+  /**
+   * Clear all added hooks.
+   *
+   * @returns {Object}
+   */
+  clearLocalHooks: function clearLocalHooks() {
+    this._localHooks = {};
+
+    return this;
+  }
+};
+
+(0, _object.defineGetter)(localHooks, 'MIXIN_NAME', MIXIN_NAME, {
+  writable: false,
+  enumerable: false
+});
+
+exports.default = localHooks;
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
 exports.createClassName = createClassName;
 exports.createDefaultCustomBorder = createDefaultCustomBorder;
 exports.createSingleEmptyBorder = createSingleEmptyBorder;
@@ -7525,14 +7673,14 @@ function markSelected(label) {
 }
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports) {
 
 module.exports = false;
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports) {
 
 var id = 0;
@@ -7543,7 +7691,7 @@ module.exports = function (key) {
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports) {
 
 module.exports = function (bitmap, value) {
@@ -7557,14 +7705,14 @@ module.exports = function (bitmap, value) {
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports) {
 
 module.exports = {};
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var def = __webpack_require__(20).f;
@@ -7577,14 +7725,14 @@ module.exports = function (it, tag, stat) {
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports) {
 
 exports.f = {}.propertyIsEnumerable;
 
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7699,11 +7847,15 @@ BaseEditor.prototype.beginEditing = function (newInitialValue, event) {
     return;
   }
   this.instance.view.scrollViewport(new _src.CellCoords(this.row, this.col));
-  this.instance.view.render();
   this.state = EditorState.EDITING;
 
-  newInitialValue = typeof newInitialValue === 'string' ? newInitialValue : this.originalValue;
-  this.setValue((0, _mixed.stringify)(newInitialValue));
+  // Set the editor value only in the full edit mode. In other mode the focusable element has to be empty,
+  // otherwise IME (editor for Asia users) doesn't work.
+  if (this.isInFullEditMode()) {
+    var stringifiedInitialValue = typeof newInitialValue === 'string' ? newInitialValue : (0, _mixed.stringify)(this.originalValue);
+
+    this.setValue(stringifiedInitialValue);
+  }
 
   this.open(event);
   this._opened = true;
@@ -7737,9 +7889,9 @@ BaseEditor.prototype.finishEditing = function (restoreOriginalValue, ctrlDown, c
   }
 
   if (this.state == EditorState.VIRGIN) {
-    this.instance._registerTimeout(setTimeout(function () {
+    this.instance._registerTimeout(function () {
       _this._fireCallbacks(true);
-    }, 0));
+    });
 
     return;
   }
@@ -7785,6 +7937,7 @@ BaseEditor.prototype.discardEditor = function (result) {
   if (this.state !== EditorState.FINISHED) {
     return;
   }
+
   // validator was defined and failed
   if (result === false && this.cellProperties.allowInvalid !== true) {
     this.instance.selectCell(this.row, this.col);
@@ -7851,7 +8004,7 @@ BaseEditor.prototype.checkEditorSection = function () {
 exports.default = BaseEditor;
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8000,13 +8153,13 @@ var CellCoords = function () {
 exports.default = CellCoords;
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_56__;
+module.exports = __WEBPACK_EXTERNAL_MODULE_57__;
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8083,7 +8236,7 @@ function error() {
 };
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8097,7 +8250,7 @@ var _autoResize = __webpack_require__(233);
 
 var _autoResize2 = _interopRequireDefault(_autoResize);
 
-var _baseEditor = __webpack_require__(54);
+var _baseEditor = __webpack_require__(55);
 
 var _baseEditor2 = _interopRequireDefault(_baseEditor);
 
@@ -8106,6 +8259,8 @@ var _eventManager = __webpack_require__(6);
 var _eventManager2 = _interopRequireDefault(_eventManager);
 
 var _unicode = __webpack_require__(21);
+
+var _browser = __webpack_require__(27);
 
 var _event = __webpack_require__(13);
 
@@ -8125,10 +8280,55 @@ TextEditor.prototype.init = function () {
   this.eventManager = new _eventManager2.default(this);
   this.bindEvents();
   this.autoResize = (0, _autoResize2.default)();
+  this.holderZIndex = -1;
 
   this.instance.addHook('afterDestroy', function () {
     that.destroy();
   });
+};
+
+TextEditor.prototype.prepare = function (row, col, prop, td, originalValue, cellProperties) {
+  var _this = this;
+
+  var previousState = this.state;
+
+  _baseEditor2.default.prototype.prepare.apply(this, arguments);
+
+  if (!cellProperties.readOnly) {
+    this.refreshDimensions(true);
+
+    var allowInvalid = cellProperties.allowInvalid,
+        fragmentSelection = cellProperties.fragmentSelection;
+
+
+    if (allowInvalid) {
+      this.TEXTAREA.value = ''; // Remove an empty space from texarea (added by copyPaste plugin to make copy/paste functionality work with IME)
+    }
+
+    if (previousState !== _baseEditor.EditorState.FINISHED) {
+      this.hideEditableElement();
+    }
+
+    // @TODO: The fragmentSelection functionality is conflicted with IME. For this feature refocus has to
+    // be disabled (to make IME working).
+    var restoreFocus = !fragmentSelection;
+
+    if (restoreFocus) {
+      this.instance._registerImmediate(function () {
+        return _this.focus();
+      });
+    }
+  }
+};
+
+TextEditor.prototype.hideEditableElement = function () {
+  this.textareaParentStyle.top = '-9999px';
+  this.textareaParentStyle.left = '-9999px';
+  this.textareaParentStyle.zIndex = '-1';
+};
+
+TextEditor.prototype.showEditableElement = function () {
+  this.textareaParentStyle.zIndex = this.holderZIndex >= 0 ? this.holderZIndex : '';
 };
 
 TextEditor.prototype.getValue = function () {
@@ -8137,6 +8337,15 @@ TextEditor.prototype.getValue = function () {
 
 TextEditor.prototype.setValue = function (newValue) {
   this.TEXTAREA.value = newValue;
+};
+
+TextEditor.prototype.beginEditing = function (newInitialValue, event) {
+  if (this.state !== _baseEditor.EditorState.VIRGIN) {
+    return;
+  }
+
+  this.TEXTAREA.value = ''; // Remove an empty space from texarea (added by copyPaste plugin to make copy/paste functionality work with IME).
+  _baseEditor2.default.prototype.beginEditing.apply(this, arguments);
 };
 
 var onBeforeKeyDown = function onBeforeKeyDown(event) {
@@ -8230,30 +8439,32 @@ var onBeforeKeyDown = function onBeforeKeyDown(event) {
 
 TextEditor.prototype.open = function () {
   this.refreshDimensions(); // need it instantly, to prevent https://github.com/handsontable/handsontable/issues/348
+  this.showEditableElement();
 
   this.instance.addHook('beforeKeyDown', onBeforeKeyDown);
 };
 
 TextEditor.prototype.close = function (tdOutside) {
-  this.textareaParentStyle.display = 'none';
-
   this.autoResize.unObserve();
 
   if (document.activeElement === this.TEXTAREA) {
     this.instance.listen(); // don't refocus the table if user focused some cell outside of HT on purpose
   }
+
+  this.hideEditableElement();
   this.instance.removeHook('beforeKeyDown', onBeforeKeyDown);
 };
 
 TextEditor.prototype.focus = function () {
-  this.TEXTAREA.focus();
+  // For IME editor textarea element must be focused using ".select" method. Using ".focus" browser automatically scroll into
+  // the focused element which is undesire effect.
+  this.TEXTAREA.select();
   (0, _element.setCaretPosition)(this.TEXTAREA, this.TEXTAREA.value.length);
 };
 
 TextEditor.prototype.createElements = function () {
-  //    this.$body = $(document.body);
-
   this.TEXTAREA = document.createElement('TEXTAREA');
+  this.TEXTAREA.tabIndex = -1;
 
   (0, _element.addClass)(this.TEXTAREA, 'handsontableInput');
 
@@ -8265,23 +8476,16 @@ TextEditor.prototype.createElements = function () {
   (0, _element.addClass)(this.TEXTAREA_PARENT, 'handsontableInputHolder');
 
   this.textareaParentStyle = this.TEXTAREA_PARENT.style;
-  this.textareaParentStyle.top = 0;
-  this.textareaParentStyle.left = 0;
-  this.textareaParentStyle.display = 'none';
+  this.textareaParentStyle.zIndex = '-1';
 
   this.TEXTAREA_PARENT.appendChild(this.TEXTAREA);
 
   this.instance.rootElement.appendChild(this.TEXTAREA_PARENT);
-
-  var that = this;
-  this.instance._registerTimeout(setTimeout(function () {
-    that.refreshDimensions();
-  }, 0));
 };
 
 TextEditor.prototype.getEditedCell = function () {
-  var editorSection = this.checkEditorSection(),
-      editedCell;
+  var editorSection = this.checkEditorSection();
+  var editedCell = void 0;
 
   switch (editorSection) {
     case 'top':
@@ -8289,39 +8493,39 @@ TextEditor.prototype.getEditedCell = function () {
         row: this.row,
         col: this.col
       });
-      this.textareaParentStyle.zIndex = 101;
+      this.holderZIndex = 101;
       break;
     case 'top-left-corner':
       editedCell = this.instance.view.wt.wtOverlays.topLeftCornerOverlay.clone.wtTable.getCell({
         row: this.row,
         col: this.col
       });
-      this.textareaParentStyle.zIndex = 103;
+      this.holderZIndex = 103;
       break;
     case 'bottom-left-corner':
       editedCell = this.instance.view.wt.wtOverlays.bottomLeftCornerOverlay.clone.wtTable.getCell({
         row: this.row,
         col: this.col
       });
-      this.textareaParentStyle.zIndex = 103;
+      this.holderZIndex = 103;
       break;
     case 'left':
       editedCell = this.instance.view.wt.wtOverlays.leftOverlay.clone.wtTable.getCell({
         row: this.row,
         col: this.col
       });
-      this.textareaParentStyle.zIndex = 102;
+      this.holderZIndex = 102;
       break;
     case 'bottom':
       editedCell = this.instance.view.wt.wtOverlays.bottomOverlay.clone.wtTable.getCell({
         row: this.row,
         col: this.col
       });
-      this.textareaParentStyle.zIndex = 102;
+      this.holderZIndex = 102;
       break;
     default:
       editedCell = this.instance.getCell(this.row, this.col);
-      this.textareaParentStyle.zIndex = '';
+      this.holderZIndex = -1;
       break;
   }
 
@@ -8337,14 +8541,18 @@ TextEditor.prototype.refreshValue = function () {
 };
 
 TextEditor.prototype.refreshDimensions = function () {
-  if (this.state !== _baseEditor.EditorState.EDITING) {
+  var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+  if (this.state !== _baseEditor.EditorState.EDITING && !force) {
     return;
   }
   this.TD = this.getEditedCell();
 
   // TD is outside of the viewport.
   if (!this.TD) {
-    this.close(true);
+    if (!force) {
+      this.close(true);
+    }
 
     return;
   }
@@ -8410,6 +8618,7 @@ TextEditor.prototype.refreshDimensions = function () {
 
   this.textareaParentStyle.top = editTop + 'px';
   this.textareaParentStyle.left = editLeft + 'px';
+  this.showEditableElement();
 
   var firstRowOffset = this.instance.view.wt.wtViewport.rowsRenderCalculator.startPosition;
   var firstColumnOffset = this.instance.view.wt.wtViewport.columnsRenderCalculator.startPosition;
@@ -8431,7 +8640,6 @@ TextEditor.prototype.refreshDimensions = function () {
 
   this.TEXTAREA.style.fontSize = cellComputedStyle.fontSize;
   this.TEXTAREA.style.fontFamily = cellComputedStyle.fontFamily;
-  this.TEXTAREA.style.backgroundColor = ''; // RESET STYLE
   this.TEXTAREA.style.backgroundColor = backgroundColor ? backgroundColor : (0, _element.getComputedStyle)(this.TEXTAREA).backgroundColor;
 
   this.autoResize.init(this.TEXTAREA, {
@@ -8440,8 +8648,6 @@ TextEditor.prototype.refreshDimensions = function () {
     minWidth: Math.min(width, maxWidth),
     maxWidth: maxWidth // TEXTAREA should never be wider than visible part of the viewport (should not cover the scrollbar)
   }, true);
-
-  this.textareaParentStyle.display = 'block';
 };
 
 TextEditor.prototype.bindEvents = function () {
@@ -8450,7 +8656,6 @@ TextEditor.prototype.bindEvents = function () {
   this.eventManager.addEventListener(this.TEXTAREA, 'cut', function (event) {
     (0, _event.stopPropagation)(event);
   });
-
   this.eventManager.addEventListener(this.TEXTAREA, 'paste', function (event) {
     (0, _event.stopPropagation)(event);
   });
@@ -8483,82 +8688,6 @@ TextEditor.prototype.destroy = function () {
 };
 
 exports.default = TextEditor;
-
-/***/ }),
-/* 59 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _array = __webpack_require__(1);
-
-var _object = __webpack_require__(2);
-
-var MIXIN_NAME = 'localHooks';
-
-/**
- * Mixin object to extend objects functionality for local hooks.
- *
- * @type {Object}
- */
-var localHooks = {
-  /**
-   * Internal hooks storage.
-   */
-  _localHooks: Object.create(null),
-
-  /**
-   * Add hook to the collection.
-   *
-   * @param {String} key Hook name.
-   * @param {Function} callback Hook callback
-   */
-  addLocalHook: function addLocalHook(key, callback) {
-    if (!this._localHooks[key]) {
-      this._localHooks[key] = [];
-    }
-    this._localHooks[key].push(callback);
-  },
-
-
-  /**
-   * Run hooks.
-   *
-   * @param {String} key Hook name.
-   * @param {*} params
-   */
-  runLocalHooks: function runLocalHooks(key) {
-    var _this = this;
-
-    for (var _len = arguments.length, params = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      params[_key - 1] = arguments[_key];
-    }
-
-    if (this._localHooks[key]) {
-      (0, _array.arrayEach)(this._localHooks[key], function (callback) {
-        return callback.apply(_this, params);
-      });
-    }
-  },
-
-
-  /**
-   * Clear all added hooks.
-   */
-  clearLocalHooks: function clearLocalHooks() {
-    this._localHooks = {};
-  }
-};
-
-(0, _object.defineGetter)(localHooks, 'MIXIN_NAME', MIXIN_NAME, {
-  writable: false,
-  enumerable: false
-});
-
-exports.default = localHooks;
 
 /***/ }),
 /* 60 */
@@ -8664,7 +8793,7 @@ var anInstance = __webpack_require__(64);
 var isObject = __webpack_require__(9);
 var fails = __webpack_require__(23);
 var $iterDetect = __webpack_require__(79);
-var setToStringTag = __webpack_require__(52);
+var setToStringTag = __webpack_require__(53);
 var inheritIfRequired = __webpack_require__(209);
 
 module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
@@ -8744,8 +8873,8 @@ module.exports = function (NAME, wrapper, methods, common, IS_MAP, IS_WEAK) {
 /* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var pIE = __webpack_require__(53);
-var createDesc = __webpack_require__(50);
+var pIE = __webpack_require__(54);
+var createDesc = __webpack_require__(51);
 var toIObject = __webpack_require__(24);
 var toPrimitive = __webpack_require__(73);
 var has = __webpack_require__(29);
@@ -9074,7 +9203,7 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var shared = __webpack_require__(77)('keys');
-var uid = __webpack_require__(49);
+var uid = __webpack_require__(50);
 module.exports = function (key) {
   return shared[key] || (shared[key] = uid(key));
 };
@@ -9093,7 +9222,7 @@ var store = global[SHARED] || (global[SHARED] = {});
   return store[key] || (store[key] = value !== undefined ? value : {});
 })('versions', []).push({
   version: core.version,
-  mode: __webpack_require__(48) ? 'pure' : 'global',
+  mode: __webpack_require__(49) ? 'pure' : 'global',
   copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
 });
 
@@ -9288,7 +9417,7 @@ module.exports = function (KEY) {
 "use strict";
 
 var $defineProperty = __webpack_require__(20);
-var createDesc = __webpack_require__(50);
+var createDesc = __webpack_require__(51);
 
 module.exports = function (object, index, value) {
   if (index in object) $defineProperty.f(object, index, createDesc(0, value));
@@ -9304,7 +9433,7 @@ module.exports = function (object, index, value) {
 
 var addToUnscopables = __webpack_require__(46);
 var step = __webpack_require__(110);
-var Iterators = __webpack_require__(51);
+var Iterators = __webpack_require__(52);
 var toIObject = __webpack_require__(24);
 
 // 22.1.3.4 Array.prototype.entries()
@@ -9348,7 +9477,7 @@ exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _coords = __webpack_require__(55);
+var _coords = __webpack_require__(56);
 
 var _coords2 = _interopRequireDefault(_coords);
 
@@ -10169,7 +10298,7 @@ var _setting = __webpack_require__(90);
 
 var _function = __webpack_require__(43);
 
-var _console = __webpack_require__(57);
+var _console = __webpack_require__(58);
 
 var _mixed = __webpack_require__(11);
 
@@ -10302,6 +10431,7 @@ function Core(rootElement, userSettings) {
 
   (0, _keyStateObserver.startObserving)();
 
+  this.isDestroyed = false;
   this.rootElement = rootElement;
   this.isHotTableEnv = (0, _element.isChildOfWebComponentTable)(this.rootElement);
   _eventManager2.default.isHotTableEnv = this.isHotTableEnv;
@@ -11470,10 +11600,14 @@ function Core(rootElement, userSettings) {
    *
    * @memberof Core#
    * @function destroyEditor
-   * @param {Boolean} [revertOriginal] If != `true`, edited data is saved. Otherwise the previous value is restored.
+   * @param {Boolean} [revertOriginal=false] If `true`, the previous value will be restored. Otherwise, the edited value will be saved.
+   * @param {Boolean} [prepareEditorIfNeeded=true] If `true` the editor under the selected cell will be prepared to open.
    */
-  this.destroyEditor = function (revertOriginal) {
-    instance._refreshBorders(revertOriginal);
+  this.destroyEditor = function () {
+    var revertOriginal = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    var prepareEditorIfNeeded = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+    instance._refreshBorders(revertOriginal, prepareEditorIfNeeded);
   };
 
   /**
@@ -13550,8 +13684,9 @@ function Core(rootElement, userSettings) {
    * @fires Hooks#afterDestroy
    */
   this.destroy = function () {
-
     instance._clearTimeouts();
+    instance._clearImmediates();
+
     if (instance.view) {
       // in case HT is destroyed before initialization has finished
       instance.view.destroy();
@@ -13584,7 +13719,7 @@ function Core(rootElement, userSettings) {
       if ((0, _object.hasOwnProperty)(instance, i)) {
         // replace instance methods with post mortem
         if ((0, _function.isFunction)(instance[i])) {
-          instance[i] = postMortem;
+          instance[i] = postMortem(i);
         } else if (i !== 'guid') {
           // replace instance properties with null (restores memory)
           // it should not be necessary but this prevents a memory leak side effects that show itself in Jasmine tests
@@ -13592,6 +13727,7 @@ function Core(rootElement, userSettings) {
         }
       }
     }
+    instance.isDestroyed = true;
 
     // replace private properties with null (restores memory)
     // it should not be necessary but this prevents a memory leak side effects that show itself in Jasmine tests
@@ -13612,8 +13748,10 @@ function Core(rootElement, userSettings) {
    *
    * @private
    */
-  function postMortem() {
-    throw new Error('This method cannot be called because this Handsontable instance has been destroyed');
+  function postMortem(method) {
+    return function () {
+      throw new Error('The "' + method + '" method cannot be called because this Handsontable instance has been destroyed');
+    };
   }
 
   /**
@@ -13768,10 +13906,18 @@ function Core(rootElement, userSettings) {
   /**
    * Sets timeout. Purpose of this method is to clear all known timeouts when `destroy` method is called.
    *
-   * @param {*} handle
+   * @param {Number|Function} handle Handler returned from setTimeout or function to execute (it will be automatically wraped
+   *                                 by setTimeout function).
+   * @param {Number} [delay=0] If first argument is passed as a function this argument set delay of the execution of that function.
    * @private
    */
   this._registerTimeout = function (handle) {
+    var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+    if (typeof handle === 'function') {
+      handle = setTimeout(handle, delay);
+    }
+
     this.timeouts.push(handle);
   };
 
@@ -13781,22 +13927,49 @@ function Core(rootElement, userSettings) {
    * @private
    */
   this._clearTimeouts = function () {
-    for (var i = 0, ilen = this.timeouts.length; i < ilen; i++) {
-      clearTimeout(this.timeouts[i]);
-    }
+    (0, _array.arrayEach)(this.timeouts, function (handler) {
+      clearTimeout(handler);
+    });
+  };
+
+  this.immediates = [];
+
+  /**
+   * Execute function execution to the next event loop cycle. Purpose of this method is to clear all known timeouts when `destroy` method is called.
+   *
+   * @param {Function} callback Function to be delayed in execution.
+   * @private
+   */
+  this._registerImmediate = function (callback) {
+    this.immediates.push(setImmediate(callback));
+  };
+
+  /**
+   * Clears all known timeouts.
+   *
+   * @private
+   */
+  this._clearImmediates = function () {
+    (0, _array.arrayEach)(this.immediates, function (handler) {
+      clearImmediate(handler);
+    });
   };
 
   /**
    * Refresh selection borders. This is temporary method relic after selection rewrite.
    *
    * @private
-   * @param {Boolean} revertOriginal
+   * @param {Boolean} [revertOriginal=false] If `true`, the previous value will be restored. Otherwise, the edited value will be saved.
+   * @param {Boolean} [prepareEditorIfNeeded=true] If `true` the editor under the selected cell will be prepared to open.
    */
-  this._refreshBorders = function (revertOriginal) {
+  this._refreshBorders = function () {
+    var revertOriginal = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    var prepareEditorIfNeeded = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
     editorManager.destroyEditor(revertOriginal);
     instance.view.render();
 
-    if (selection.isSelected()) {
+    if (prepareEditorIfNeeded && selection.isSelected()) {
       editorManager.prepareEditor();
     }
   };
@@ -14877,48 +15050,63 @@ var MIXIN_NAME = 'arrayMapper';
  * @type {Object}
  */
 var arrayMapper = {
+  /**
+   * Array is storing indexes in the below form:
+   *
+   * VISUAL_INDEX¹ => PHYSICAL_INDEX²
+   *
+   * It maps from visible row / column to its representation in the data source. For example, when we sorted data, our 1st visible row can represent 4th row from the original data,
+   * 2nd can be mapped to 3rd, 3rd to 2nd, etc. (keep in mind that array is indexed from the zero).
+   *
+   * ¹ internally stored as array index; from 0 to n, where n is number of visible cells on the axis
+   * ² internally stored as array value, contains some indexes (just for not trimmed cells) from data source
+   *
+   */
   _arrayMap: [],
 
   /**
-   * Get translated index by its physical index.
+   * Get physical index by its visual index.
    *
-   * @param {Number} physicalIndex Physical index.
-   * @return {Number|null} Returns translated index mapped by passed physical index.
+   * @param {Number} visualIndex Visual index.
+   * @return {Number|null} Returns translated index mapped by passed visual index.
    */
-  getValueByIndex: function getValueByIndex(physicalIndex) {
+  getValueByIndex: function getValueByIndex(visualIndex) {
     var length = this._arrayMap.length;
-    var translatedIndex = null;
+    var physicalIndex = null;
 
-    if (physicalIndex < length) {
-      translatedIndex = this._arrayMap[physicalIndex];
+    if (visualIndex < length) {
+      physicalIndex = this._arrayMap[visualIndex];
     }
 
-    return translatedIndex;
+    return physicalIndex;
   },
 
 
   /**
-   * Get physical index by its translated index.
+   * Get visual index by its physical index.
    *
-   * @param {*} translatedIndex Value to search.
-   * @returns {Number|null} Returns a physical index of the array mapper.
+   * @param {Number} physicalIndex Physical index to search.
+   * @returns {Number|null} Returns a visual index of the index mapper.
    */
-  getIndexByValue: function getIndexByValue(translatedIndex) {
-    var physicalIndex = void 0;
+  getIndexByValue: function getIndexByValue(physicalIndex) {
+    var visualIndex = null;
 
-    // eslint-disable-next-line no-cond-assign, no-return-assign
-    return (physicalIndex = this._arrayMap.indexOf(translatedIndex)) === -1 ? null : physicalIndex;
+    if (this._arrayMap.includes(physicalIndex)) {
+      visualIndex = this._arrayMap.indexOf(physicalIndex);
+    }
+
+    return visualIndex;
   },
 
 
   /**
-   * Insert new items to array mapper starting at passed index. New entries will be a continuation of last value in the array.
+   * Insert new items to the index mapper starting at passed index. New entries will be a continuation of last value in the array.
    *
-   * @param {Number} physicalIndex Array index.
-   * @param {Number} [amount=1] Defines how many items will be created to an array.
+   * @param {Number} visualIndex Visual index.
+   * @param {Number} [amount=1] Defines how many items will be added to the index mapper.
    * @returns {Array} Returns added items.
    */
-  insertItems: function insertItems(physicalIndex) {
+  insertItems: function insertItems(visualIndex) {
     var _this = this;
 
     var amount = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
@@ -14927,7 +15115,7 @@ var arrayMapper = {
     var addedItems = [];
 
     (0, _number.rangeEach)(amount - 1, function (count) {
-      addedItems.push(_this._arrayMap.splice(physicalIndex + count, 0, newIndex + count));
+      addedItems.push(_this._arrayMap.splice(visualIndex + count, 0, newIndex + count));
     });
 
     return addedItems;
@@ -14935,34 +15123,35 @@ var arrayMapper = {
 
 
   /**
-   * Remove items from array mapper.
+   * Remove items from the index mapper.
    *
-   * @param {Number} physicalIndex Array index.
+   * @param {Number|Array} visualIndexes Removed index(es).
    * @param {Number} [amount=1] Defines how many items will be created to an array.
    * @returns {Array} Returns removed items.
    */
-  removeItems: function removeItems(physicalIndex) {
+  removeItems: function removeItems(visualIndexes) {
     var _this2 = this;
 
     var amount = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
     var removedItems = [];
 
-    if (Array.isArray(physicalIndex)) {
+    if (Array.isArray(visualIndexes)) {
       var mapCopy = [].concat(this._arrayMap);
+      var indexesCopy = [].concat(visualIndexes);
 
       // Sort descending
-      physicalIndex.sort(function (a, b) {
+      indexesCopy.sort(function (a, b) {
         return b - a;
       });
 
-      removedItems = (0, _array.arrayReduce)(physicalIndex, function (acc, item) {
+      removedItems = (0, _array.arrayReduce)(indexesCopy, function (acc, item) {
         _this2._arrayMap.splice(item, 1);
 
         return acc.concat(mapCopy.slice(item, item + 1));
       }, []);
     } else {
-      removedItems = this._arrayMap.splice(physicalIndex, amount);
+      removedItems = this._arrayMap.splice(visualIndexes, amount);
     }
 
     return removedItems;
@@ -14972,33 +15161,33 @@ var arrayMapper = {
   /**
    * Unshift items (remove and shift chunk of array to the left).
    *
-   * @param {Number|Array} physicalIndex Array index or Array of indexes to unshift.
-   * @param {Number} [amount=1] Defines how many items will be removed from an array (when index is passed as number).
+   * @param {Number|Array} itemIndex Visual index(es) to unshift.
+   * @param {Number} [amount=1] Defines how many items will be removed from the index mapper (when index is passed as number).
    */
-  unshiftItems: function unshiftItems(physicalIndex) {
+  unshiftItems: function unshiftItems(itemIndex) {
     var amount = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
-    var removedItems = this.removeItems(physicalIndex, amount);
+    var removedItems = this.removeItems(itemIndex, amount);
 
-    function countRowShift(logicalRow) {
+    function countIndexShift(index) {
       // Todo: compare perf between reduce vs sort->each->brake
-      return (0, _array.arrayReduce)(removedItems, function (count, removedLogicalRow) {
-        if (logicalRow > removedLogicalRow) {
-          count++;
+      return (0, _array.arrayReduce)(removedItems, function (count, removedIndex) {
+        if (index > removedIndex) {
+          count += 1;
         }
 
         return count;
       }, 0);
     }
 
-    this._arrayMap = (0, _array.arrayMap)(this._arrayMap, function (logicalRow, physicalRow) {
-      var rowShift = countRowShift(logicalRow);
+    this._arrayMap = (0, _array.arrayMap)(this._arrayMap, function (visualIndex) {
+      var indexShift = countIndexShift(visualIndex);
 
-      if (rowShift) {
-        logicalRow -= rowShift;
+      if (indexShift) {
+        visualIndex -= indexShift;
       }
 
-      return logicalRow;
+      return visualIndex;
     });
   },
 
@@ -15006,37 +15195,51 @@ var arrayMapper = {
   /**
    * Shift (right shifting) items starting at passed index.
    *
-   * @param {Number} physicalIndex Array index.
+   * @param {Number} itemIndex Visual index.
    * @param {Number} [amount=1] Defines how many items will be created to an array.
    */
-  shiftItems: function shiftItems(physicalIndex) {
+  shiftItems: function shiftItems(itemIndex) {
     var _this3 = this;
 
     var amount = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
 
-    this._arrayMap = (0, _array.arrayMap)(this._arrayMap, function (row) {
-      if (row >= physicalIndex) {
-        row += amount;
+    this._arrayMap = (0, _array.arrayMap)(this._arrayMap, function (visualIndex) {
+      if (visualIndex >= itemIndex) {
+        visualIndex += amount;
       }
-      return row;
+
+      return visualIndex;
     });
 
     (0, _number.rangeEach)(amount - 1, function (count) {
-      _this3._arrayMap.splice(physicalIndex + count, 0, physicalIndex + count);
+      _this3._arrayMap.splice(itemIndex + count, 0, itemIndex + count);
     });
   },
 
 
   /**
-   * Swap indexes in arrayMapper.
+   * Move indexes in the index mapper.
    *
-   * @param {Number} physicalIndexFrom index to move.
-   * @param {Number} physicalIndexTo index to.
+   * @param {Number|Array} movedIndexes Visual index(es) to move.
+   * @param {Number} finalIndex Visual row index being a start index for the moved rows.
    */
-  swapIndexes: function swapIndexes(physicalIndexFrom, physicalIndexTo) {
-    var _arrayMap;
+  moveItems: function moveItems(movedIndexes, finalIndex) {
+    var _this4 = this,
+        _arrayMap;
 
-    (_arrayMap = this._arrayMap).splice.apply(_arrayMap, [physicalIndexTo, 0].concat(_toConsumableArray(this._arrayMap.splice(physicalIndexFrom, 1))));
+    if (typeof movedIndexes === 'number') {
+      movedIndexes = [movedIndexes];
+    }
+
+    var physicalMovedIndexes = (0, _array.arrayMap)(movedIndexes, function (row) {
+      return _this4.getValueByIndex(row);
+    });
+
+    // We remove moved elements from the array at start.
+    this.removeItems(movedIndexes);
+
+    // We add moved elements at the destination position.
+    (_arrayMap = this._arrayMap).splice.apply(_arrayMap, [finalIndex, 0].concat(_toConsumableArray(physicalMovedIndexes)));
   },
 
 
@@ -15902,7 +16105,7 @@ module.exports = function (iterator, fn, value, entries) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // check on default Array iterator
-var Iterators = __webpack_require__(51);
+var Iterators = __webpack_require__(52);
 var ITERATOR = __webpack_require__(12)('iterator');
 var ArrayProto = Array.prototype;
 
@@ -15917,7 +16120,7 @@ module.exports = function (it) {
 
 var classof = __webpack_require__(107);
 var ITERATOR = __webpack_require__(12)('iterator');
-var Iterators = __webpack_require__(51);
+var Iterators = __webpack_require__(52);
 module.exports = __webpack_require__(39).getIteratorMethod = function (it) {
   if (it != undefined) return it[ITERATOR]
     || it['@@iterator']
@@ -15960,13 +16163,13 @@ module.exports = function (it) {
 
 "use strict";
 
-var LIBRARY = __webpack_require__(48);
+var LIBRARY = __webpack_require__(49);
 var $export = __webpack_require__(3);
 var redefine = __webpack_require__(30);
 var hide = __webpack_require__(31);
-var Iterators = __webpack_require__(51);
+var Iterators = __webpack_require__(52);
 var $iterCreate = __webpack_require__(208);
-var setToStringTag = __webpack_require__(52);
+var setToStringTag = __webpack_require__(53);
 var getPrototypeOf = __webpack_require__(109);
 var ITERATOR = __webpack_require__(12)('iterator');
 var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
@@ -16216,7 +16419,7 @@ module.exports = Array.isArray || function isArray(arg) {
 // 19.1.2.1 Object.assign(target, source, ...)
 var getKeys = __webpack_require__(37);
 var gOPS = __webpack_require__(69);
-var pIE = __webpack_require__(53);
+var pIE = __webpack_require__(54);
 var toObject = __webpack_require__(33);
 var IObject = __webpack_require__(75);
 var $assign = Object.assign;
@@ -16367,7 +16570,7 @@ __webpack_require__(66)(WEAK_SET, function (get) {
 
 "use strict";
 
-var LIBRARY = __webpack_require__(48);
+var LIBRARY = __webpack_require__(49);
 var global = __webpack_require__(15);
 var ctx = __webpack_require__(32);
 var classof = __webpack_require__(107);
@@ -16588,7 +16791,7 @@ if (!USE_NATIVE) {
 }
 
 $export($export.G + $export.W + $export.F * !USE_NATIVE, { Promise: $Promise });
-__webpack_require__(52)($Promise, PROMISE);
+__webpack_require__(53)($Promise, PROMISE);
 __webpack_require__(111)(PROMISE);
 Wrapper = __webpack_require__(39)[PROMISE];
 
@@ -16694,8 +16897,8 @@ var redefine = __webpack_require__(30);
 var META = __webpack_require__(34).KEY;
 var $fails = __webpack_require__(23);
 var shared = __webpack_require__(77);
-var setToStringTag = __webpack_require__(52);
-var uid = __webpack_require__(49);
+var setToStringTag = __webpack_require__(53);
+var uid = __webpack_require__(50);
 var wks = __webpack_require__(12);
 var wksExt = __webpack_require__(122);
 var wksDefine = __webpack_require__(217);
@@ -16705,7 +16908,7 @@ var anObject = __webpack_require__(18);
 var isObject = __webpack_require__(9);
 var toIObject = __webpack_require__(24);
 var toPrimitive = __webpack_require__(73);
-var createDesc = __webpack_require__(50);
+var createDesc = __webpack_require__(51);
 var _create = __webpack_require__(74);
 var gOPNExt = __webpack_require__(123);
 var $GOPD = __webpack_require__(67);
@@ -16834,10 +17037,10 @@ if (!USE_NATIVE) {
   $GOPD.f = $getOwnPropertyDescriptor;
   $DP.f = $defineProperty;
   __webpack_require__(82).f = gOPNExt.f = $getOwnPropertyNames;
-  __webpack_require__(53).f = $propertyIsEnumerable;
+  __webpack_require__(54).f = $propertyIsEnumerable;
   __webpack_require__(69).f = $getOwnPropertySymbols;
 
-  if (DESCRIPTORS && !__webpack_require__(48)) {
+  if (DESCRIPTORS && !__webpack_require__(49)) {
     redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
   }
 
@@ -17741,7 +17944,7 @@ $export($export.S, 'Object', {
 
 var getKeys = __webpack_require__(37);
 var toIObject = __webpack_require__(24);
-var isEnum = __webpack_require__(53).f;
+var isEnum = __webpack_require__(54).f;
 module.exports = function (isEntries) {
   return function (it) {
     var O = toIObject(it);
@@ -17881,7 +18084,7 @@ var getKeys = __webpack_require__(37);
 var redefine = __webpack_require__(30);
 var global = __webpack_require__(15);
 var hide = __webpack_require__(31);
-var Iterators = __webpack_require__(51);
+var Iterators = __webpack_require__(52);
 var wks = __webpack_require__(12);
 var ITERATOR = wks('iterator');
 var TO_STRING_TAG = wks('toStringTag');
@@ -20497,7 +20700,7 @@ var _element = __webpack_require__(0);
 
 var _function = __webpack_require__(43);
 
-var _coords = __webpack_require__(55);
+var _coords = __webpack_require__(56);
 
 var _coords2 = _interopRequireDefault(_coords);
 
@@ -21288,7 +21491,7 @@ var _templateObject = _taggedTemplateLiteral(['Performance tip: Handsontable ren
 
 var _element = __webpack_require__(0);
 
-var _console = __webpack_require__(57);
+var _console = __webpack_require__(58);
 
 var _templateLiteralTag = __webpack_require__(42);
 
@@ -22602,7 +22805,7 @@ var _eventManager = __webpack_require__(6);
 
 var _eventManager2 = _interopRequireDefault(_eventManager);
 
-var _coords = __webpack_require__(55);
+var _coords = __webpack_require__(56);
 
 var _coords2 = _interopRequireDefault(_coords);
 
@@ -23360,10 +23563,10 @@ function onBeforeKeyDown(event) {
     }
 
     if (editor.htEditor) {
-      editor.instance._registerTimeout(setTimeout(function () {
+      editor.instance._registerTimeout(function () {
         editor.queryChoices(editor.TEXTAREA.value);
         skipOne = true;
-      }, timeOffset));
+      }, timeOffset);
     }
   }
 }
@@ -23383,7 +23586,7 @@ AutocompleteEditor.prototype.open = function () {
   var _this = this;
   var trimDropdown = this.cellProperties.trimDropdown === void 0 ? true : this.cellProperties.trimDropdown;
 
-  this.TEXTAREA.style.visibility = 'visible';
+  this.showEditableElement();
   this.focus();
 
   choicesListHot.updateSettings({
@@ -23430,14 +23633,11 @@ AutocompleteEditor.prototype.open = function () {
     skipOne = false;
   }
 
-  _this.instance._registerTimeout(setTimeout(function () {
+  _this.instance._registerTimeout(function () {
     _this.queryChoices(_this.TEXTAREA.value);
-  }, 0));
+  });
 };
 
-AutocompleteEditor.prototype.close = function () {
-  _handsontableEditor2.default.prototype.close.apply(this, arguments);
-};
 AutocompleteEditor.prototype.queryChoices = function (query) {
   var _this3 = this;
 
@@ -23757,7 +23957,7 @@ var _element = __webpack_require__(0);
 
 var _event = __webpack_require__(13);
 
-var _textEditor = __webpack_require__(58);
+var _textEditor = __webpack_require__(59);
 
 var _textEditor2 = _interopRequireDefault(_textEditor);
 
@@ -23797,6 +23997,8 @@ HandsontableEditor.prototype.prepare = function (td, row, col, prop, value, cell
     autoRowSize: false,
     readOnly: true,
     fillHandle: false,
+    autoWrapCol: false,
+    autoWrapRow: false,
     afterOnCellMouseDown: function afterOnCellMouseDown(_, coords) {
       var value = this.getSourceData(coords.row, coords.col);
 
@@ -23878,27 +24080,24 @@ HandsontableEditor.prototype.open = function () {
   // Construct and initialise a new Handsontable
   this.htEditor = new this.instance.constructor(this.htContainer, this.htOptions);
   this.htEditor.init();
+  this.htEditor.rootElement.style.display = '';
 
   if (this.cellProperties.strict) {
     this.htEditor.selectCell(0, 0);
-    this.TEXTAREA.style.visibility = 'hidden';
   } else {
     this.htEditor.deselectCell();
-    this.TEXTAREA.style.visibility = 'visible';
   }
 
   (0, _element.setCaretPosition)(this.TEXTAREA, 0, this.TEXTAREA.value.length);
 };
 
 HandsontableEditor.prototype.close = function () {
+  this.htEditor.rootElement.style.display = 'none';
   this.instance.removeHook('beforeKeyDown', onBeforeKeyDown);
-  this.instance.listen();
-
   _textEditor2.default.prototype.close.apply(this, arguments);
 };
 
 HandsontableEditor.prototype.focus = function () {
-  this.instance.listen();
   _textEditor2.default.prototype.focus.apply(this, arguments);
 };
 
@@ -23914,7 +24113,6 @@ HandsontableEditor.prototype.beginEditing = function (initialValue) {
 HandsontableEditor.prototype.finishEditing = function (isCancelled, ctrlDown) {
   if (this.htEditor && this.htEditor.isListening()) {
     // if focus is still in the HOT editor
-
     this.instance.listen(); // return the focus to the parent HOT instance
   }
 
@@ -24580,7 +24778,7 @@ DefaultSettings.prototype = {
    * Initial data source that will be bound to the data grid __by reference__ (editing data grid alters the data source).
    * Can be declared as an Array of Arrays, Array of Objects or a Function.
    *
-   * See [Understanding binding as reference](http://docs.handsontable.com/tutorial-data-binding.html#page-reference).
+   * See [Understanding binding as reference](https://docs.handsontable.com/tutorial-data-binding.html#page-reference).
    *
    * @type {Array|Function}
    * @default undefined
@@ -24591,7 +24789,7 @@ DefaultSettings.prototype = {
    * @description
    * Defines the structure of a new row when data source is an array of objects.
    *
-   * See [data-schema](http://docs.handsontable.com/tutorial-data-sources.html#page-data-schema) for examples.
+   * See [data-schema](https://docs.handsontable.com/tutorial-data-sources.html#page-data-schema) for examples.
    *
    * @type {Object}
    * @default undefined
@@ -24771,7 +24969,7 @@ DefaultSettings.prototype = {
    *
    * __Notice:__ Using this option sets a fixed number of columns (options `startCols`, `minCols`, `maxCols` will be ignored).
    *
-   * See [documentation -> datasources.html](http://docs.handsontable.com/tutorial-data-sources.html#page-nested) for examples.
+   * See [documentation -> datasources.html](https://docs.handsontable.com/tutorial-data-sources.html#page-nested) for examples.
    *
    * @type {Array|Function}
    * @default undefined
@@ -24866,7 +25064,7 @@ DefaultSettings.prototype = {
    *
    * To initialize Handsontable with predefined comments, provide cell coordinates and comment text values in a form of an array.
    *
-   * See [Comments](http://docs.handsontable.com/demo-comments_.html) demo for examples.
+   * See [Comments](https://docs.handsontable.com/demo-comments_.html) demo for examples.
    *
    * @since 0.11.0
    * @type {Boolean|Array}
@@ -24886,7 +25084,7 @@ DefaultSettings.prototype = {
    *
    * To initialize Handsontable with predefined custom borders, provide cell coordinates and border styles in a form of an array.
    *
-   * See [Custom Borders](http://docs.handsontable.com/demo-custom-borders.html) demo for examples.
+   * See [Custom Borders](https://docs.handsontable.com/demo-custom-borders.html) demo for examples.
    *
    * @since 0.11.0
    * @type {Boolean|Array}
@@ -25048,9 +25246,13 @@ DefaultSettings.prototype = {
    * ```
    *
    * @type {Boolean|String|Object}
-   * @default true
+   * @default fillHandle: {
+   *   autoInsertRow: false,
+   * }
    */
-  fillHandle: true,
+  fillHandle: {
+    autoInsertRow: false
+  },
 
   /**
    * Allows to specify the number of fixed (or *frozen*) rows at the top of the table.
@@ -25133,17 +25335,17 @@ DefaultSettings.prototype = {
    * If `true`, pressing <kbd>TAB</kbd> or right arrow in the last column will move to first column in next row.
    *
    * @type {Boolean}
-   * @default false
+   * @default true
    */
-  autoWrapRow: false,
+  autoWrapRow: true,
 
   /**
    * If `true`, pressing <kbd>ENTER</kbd> or down arrow in the last row will move to the first row in the next column.
    *
    * @type {Boolean}
-   * @default false
+   * @default true
    */
-  autoWrapCol: false,
+  autoWrapCol: true,
 
   /**
    * @description
@@ -25250,7 +25452,7 @@ DefaultSettings.prototype = {
   /**
    * @description
    * Defines how the columns react, when the declared table width is different than the calculated sum of all column widths.
-   * [See more](http://docs.handsontable.com/demo-stretching.html) mode. Possible values:
+   * [See more](https://docs.handsontable.com/demo-stretching.html) mode. Possible values:
    *  * `'none'` Disable stretching
    *  * `'last'` Stretch only the last column
    *  * `'all'` Stretch all the columns evenly
@@ -25396,7 +25598,7 @@ DefaultSettings.prototype = {
    * * `password`.
    * * `text`.
    *
-   * Or you can [register](http://docs.handsontable.com/demo-custom-renderers.html) the custom renderer under specified name and use
+   * Or you can [register](https://docs.handsontable.com/demo-custom-renderers.html) the custom renderer under specified name and use
    * its name as an alias in your configuration.
    *
    * If a function is provided, it will receive the following arguments:
@@ -25404,7 +25606,7 @@ DefaultSettings.prototype = {
    * function(instance, TD, row, col, prop, value, cellProperties) {}
    * ```
    *
-   * You can read more about custom renderes [in the documentation](http://docs.handsontable.com/demo-custom-renderers.html).
+   * You can read more about custom renderes [in the documentation](https://docs.handsontable.com/demo-custom-renderers.html).
    *
    * @example
    * ```js
@@ -25456,7 +25658,7 @@ DefaultSettings.prototype = {
 
   /**
    * @description
-   * Make cell [read only](http://docs.handsontable.com/demo-read-only.html).
+   * Make cell [read only](https://docs.handsontable.com/demo-read-only.html).
    *
    * @type {Boolean}
    * @default false
@@ -25474,7 +25676,7 @@ DefaultSettings.prototype = {
 
   /**
    * @description
-   * Setting to true enables the search plugin (see [demo](http://docs.handsontable.com/demo-search-for-values.html)).
+   * Setting to true enables the search plugin (see [demo](https://docs.handsontable.com/demo-search-for-values.html)).
    *
    * @type {Boolean}
    * @default false
@@ -25486,15 +25688,15 @@ DefaultSettings.prototype = {
    * Shortcut to define the combination of the cell renderer, editor and validator for the column, cell or whole table.
    *
    * Possible values:
-   *  * [autocomplete](http://docs.handsontable.com/demo-autocomplete.html)
-   *  * [checkbox](http://docs.handsontable.com/demo-checkbox.html)
-   *  * [date](http://docs.handsontable.com/demo-date.html)
-   *  * [dropdown](http://docs.handsontable.com/demo-dropdown.html)
-   *  * [handsontable](http://docs.handsontable.com/demo-handsontable.html)
-   *  * [numeric](http://docs.handsontable.com/demo-numeric.html)
-   *  * [password](http://docs.handsontable.com/demo-password.html)
+   *  * [autocomplete](https://docs.handsontable.com/demo-autocomplete.html)
+   *  * [checkbox](https://docs.handsontable.com/demo-checkbox.html)
+   *  * [date](https://docs.handsontable.com/demo-date.html)
+   *  * [dropdown](https://docs.handsontable.com/demo-dropdown.html)
+   *  * [handsontable](https://docs.handsontable.com/demo-handsontable.html)
+   *  * [numeric](https://docs.handsontable.com/demo-numeric.html)
+   *  * [password](https://docs.handsontable.com/demo-password.html)
    *  * text
-   *  * [time](http://docs.handsontable.com/demo-time.html)
+   *  * [time](https://docs.handsontable.com/demo-time.html)
    *
    * Or you can register the custom cell type under specified name and use
    * its name as an alias in your configuration.
@@ -25547,17 +25749,17 @@ DefaultSettings.prototype = {
    * Defines the editor for the table/column/cell.
    *
    * If a string is provided, it may be one of the following predefined values:
-   *  * [autocomplete](http://docs.handsontable.com/demo-autocomplete.html)
-   *  * [checkbox](http://docs.handsontable.com/demo-checkbox.html)
-   *  * [date](http://docs.handsontable.com/demo-date.html)
-   *  * [dropdown](http://docs.handsontable.com/demo-dropdown.html)
-   *  * [handsontable](http://docs.handsontable.com/demo-handsontable.html)
-   *  * [mobile](http://docs.handsontable.com/demo-mobiles-and-tablets.html)
-   *  * [password](http://docs.handsontable.com/demo-password.html)
-   *  * [select](http://docs.handsontable.com/demo-select.html)
+   *  * [autocomplete](https://docs.handsontable.com/demo-autocomplete.html)
+   *  * [checkbox](https://docs.handsontable.com/demo-checkbox.html)
+   *  * [date](https://docs.handsontable.com/demo-date.html)
+   *  * [dropdown](https://docs.handsontable.com/demo-dropdown.html)
+   *  * [handsontable](https://docs.handsontable.com/demo-handsontable.html)
+   *  * [mobile](https://docs.handsontable.com/demo-mobiles-and-tablets.html)
+   *  * [password](https://docs.handsontable.com/demo-password.html)
+   *  * [select](https://docs.handsontable.com/demo-select.html)
    *  * text
    *
-   * Or you can [register](http://docs.handsontable.com/tutorial-cell-editor.html#registering-an-editor) the custom editor under specified name and use
+   * Or you can [register](https://docs.handsontable.com/tutorial-cell-editor.html#registering-an-editor) the custom editor under specified name and use
    * its name as an alias in your configuration.
    *
    * To disable cell editing completely set `editor` property to `false`.
@@ -25583,7 +25785,7 @@ DefaultSettings.prototype = {
 
   /**
    * @description
-   * Autocomplete definitions. See [autocomplete demo](http://docs.handsontable.com/demo-autocomplete.html) for examples and definitions.
+   * Autocomplete definitions. See [autocomplete demo](https://docs.handsontable.com/demo-autocomplete.html) for examples and definitions.
    *
    * @type {Array}
    * @default undefined
@@ -25639,14 +25841,14 @@ DefaultSettings.prototype = {
   /**
    * @description
    * Defines if the right-click context menu should be enabled. Context menu allows to create new row or
-   * column at any place in the grid among [other features](http://docs.handsontable.com/demo-context-menu.html).
+   * column at any place in the grid among [other features](https://docs.handsontable.com/demo-context-menu.html).
    * Possible values:
    * * `true` (to enable default options),
    * * `false` (to disable completely)
    * * an array of [predefined options](https://docs.handsontable.com/demo-context-menu.html#page-specific),
-   * * an object [with defined structure](http://docs.handsontable.com/demo-context-menu.html#page-custom)
+   * * an object [with defined structure](https://docs.handsontable.com/demo-context-menu.html#page-custom)
    *
-   * See [the context menu demo](http://docs.handsontable.com/demo-context-menu.html) for examples.
+   * See [the context menu demo](https://docs.handsontable.com/demo-context-menu.html) for examples.
    *
    * @example
    * ```js
@@ -25715,7 +25917,7 @@ DefaultSettings.prototype = {
 
   /**
    * @description
-   * Turns on [Column sorting](http://docs.handsontable.com/demo-sorting-data.html).
+   * Turns on [Column sorting](https://docs.handsontable.com/demo-sorting-data.html).
    * Can be either a boolean (true/false) or an object with a declared sorting options. See the below example:
    *
    * @example
@@ -25740,8 +25942,7 @@ DefaultSettings.prototype = {
 
   /**
    * @description
-   * Turns on [Manual column move](http://docs.handsontable.com/demo-moving-rows-and-columns.html), if set to a boolean or define initial
-   * column order, if set to an array of column indexes.
+   * Turns on [Manual column move](http://docs.handsontable.com/demo-moving.html), if set to a boolean or define initial column order, if set to an array of column indexes.
    *
    * @example
    * ```js
@@ -25761,8 +25962,7 @@ DefaultSettings.prototype = {
 
   /**
    * @description
-   * Turns on [Manual column resize](http://docs.handsontable.com/demo-resizing.html), if set to a boolean or define initial
-   * column resized widths, if set to an array of numbers.
+   * Turns on [Manual column resize](http://docs.handsontable.com/demo-resizing.html), if set to a boolean or define initial column resized widths, if set to an array of numbers.
    *
    * @example
    * ```js
@@ -25782,8 +25982,7 @@ DefaultSettings.prototype = {
 
   /**
    * @description
-   * Turns on [Manual row move](http://docs.handsontable.com/demo-moving-rows-and-columns.html), if set to a boolean or define initial
-   * row order, if set to an array of row indexes.
+   * Turns on [Manual row move](http://docs.handsontable.com/demo-moving.html), if set to a boolean or define initial row order if set to an array of row indexes.
    *
    * @example
    * ```js
@@ -25791,7 +25990,7 @@ DefaultSettings.prototype = {
    * // as boolean
    * manualRowMove: true
    * ...
-   * // as a array with initial order (move row index at 0 to 1 and move row index at 1 to 4)
+   * // as a array with initial order (move row index at 1 to 0 and move row index at 4 to 1)
    * manualRowMove: [1, 4]
    * ...
    * ```
@@ -25804,8 +26003,7 @@ DefaultSettings.prototype = {
 
   /**
    * @description
-   * Turns on [Manual row resize](http://docs.handsontable.com/demo-resizing.html), if set to a boolean or define initial
-   * row resized heights, if set to an array of numbers.
+   * Turns on [Manual row resize](http://docs.handsontable.com/demo-resizing.html), if set to a boolean or define initial row resized heights, if set to an array of numbers.
    *
    * @example
    * ```js
@@ -25827,7 +26025,7 @@ DefaultSettings.prototype = {
   /**
    * @description
    * If set to `true`, it enables a possibility to merge cells. If set to an array of objects, it merges the cells provided in the objects (see the example below).
-   * [More information on the demo page.](http://docs.handsontable.com/demo-merge-cells.html)
+   * [More information on the demo page.](https://docs.handsontable.com/demo-merge-cells.html)
    *
    * @example
    * ```js
@@ -25880,10 +26078,10 @@ DefaultSettings.prototype = {
    * * `numeric`,
    * * `time`.
    *
-   * Or you can [register](http://docs.handsontable.com/demo-data-validation.html) the validator function under specified name and use
+   * Or you can [register](https://docs.handsontable.com/demo-data-validation.html) the validator function under specified name and use
    * its name as an alias in your configuration.
    *
-   * See more [in the demo](http://docs.handsontable.com/demo-data-validation.html).
+   * See more [in the demo](https://docs.handsontable.com/demo-data-validation.html).
    *
    * @example
    * ```js
@@ -26062,9 +26260,9 @@ DefaultSettings.prototype = {
   /**
    * @description
    * Object which describes if renderer should create checkbox element with label element as a parent. Option desired for
-   * [checkbox](http://docs.handsontable.com/demo-checkbox.html)-typed cells.
+   * [checkbox](https://docs.handsontable.com/demo-checkbox.html)-typed cells.
    *
-   * By default the [checkbox](http://docs.handsontable.com/demo-checkbox.html) renderer renders the checkbox without a label.
+   * By default the [checkbox](https://docs.handsontable.com/demo-checkbox.html) renderer renders the checkbox without a label.
    *
    * Possible object properties:
    *  * `property` - Defines the property name of the data object, which will to be used as a label.
@@ -26090,7 +26288,7 @@ DefaultSettings.prototype = {
   label: void 0,
 
   /**
-   * Display format. This option is desired for [numeric-typed](http://docs.handsontable.com/demo-numeric.html) cells. Format is described by two properties:
+   * Display format. This option is desired for [numeric-typed](https://docs.handsontable.com/demo-numeric.html) cells. Format is described by two properties:
    *
    * - pattern, which is handled by `numbro` for purpose of formatting numbers to desired pattern. List of supported patterns can be found [here](http://numbrojs.com/format.html#numbers).
    * - culture, which is handled by `numbro` for purpose of formatting currencies. Examples showing how it works can be found [here](http://numbrojs.com/format.html#currency). List of supported cultures can be found [here](http://numbrojs.com/languages.html#supported-languages).
@@ -26118,7 +26316,7 @@ DefaultSettings.prototype = {
   numericFormat: void 0,
 
   /**
-   * Language for Handsontable translation. Possible language codes are: `en-US`, `pl-PL`.
+   * Language for Handsontable translation. Possible language codes are [listed here](https://docs.handsontable.com/tutorial-internationalization.html#available-languages).
    *
    * @type {String}
    * @default 'en-US'
@@ -26127,7 +26325,7 @@ DefaultSettings.prototype = {
 
   /**
    * @description
-   * Data source for [select](http://docs.handsontable.com/demo-select.html)-typed cells.
+   * Data source for [select](https://docs.handsontable.com/demo-select.html)-typed cells.
    *
    * @example
    * ```js
@@ -26690,7 +26888,7 @@ var _mixed = __webpack_require__(11);
 
 var _object = __webpack_require__(2);
 
-var _console = __webpack_require__(57);
+var _console = __webpack_require__(58);
 
 var _templateLiteralTag = __webpack_require__(42);
 
@@ -28780,9 +28978,9 @@ Handsontable.DefaultSettings = _defaultSettings2.default;
 Handsontable.EventManager = _eventManager2.default;
 Handsontable._getListenersCounter = _eventManager.getListenersCounter; // For MemoryLeak tests
 
-Handsontable.buildDate = '09/05/2018 15:18:34';
+Handsontable.buildDate = '06/06/2018 13:42:57';
 Handsontable.packageName = 'handsontable';
-Handsontable.version = '3.0.0';
+Handsontable.version = '4.0.0';
 
 var baseVersion = '';
 
@@ -28921,8 +29119,8 @@ module.exports = __webpack_require__(22) ? Object.defineProperties : function de
 "use strict";
 
 var create = __webpack_require__(74);
-var descriptor = __webpack_require__(50);
-var setToStringTag = __webpack_require__(52);
+var descriptor = __webpack_require__(51);
+var setToStringTag = __webpack_require__(53);
 var IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
@@ -29132,7 +29330,7 @@ module.exports = function (C, x) {
 
 var global = __webpack_require__(15);
 var core = __webpack_require__(39);
-var LIBRARY = __webpack_require__(48);
+var LIBRARY = __webpack_require__(49);
 var wksExt = __webpack_require__(122);
 var defineProperty = __webpack_require__(20).f;
 module.exports = function (name) {
@@ -29148,7 +29346,7 @@ module.exports = function (name) {
 // all enumerable object keys, includes symbols
 var getKeys = __webpack_require__(37);
 var gOPS = __webpack_require__(69);
-var pIE = __webpack_require__(53);
+var pIE = __webpack_require__(54);
 module.exports = function (it) {
   var result = getKeys(it);
   var getSymbols = gOPS.f;
@@ -30275,7 +30473,7 @@ var _border = __webpack_require__(188);
 
 var _border2 = _interopRequireDefault(_border);
 
-var _coords = __webpack_require__(55);
+var _coords = __webpack_require__(56);
 
 var _coords2 = _interopRequireDefault(_coords);
 
@@ -30622,18 +30820,10 @@ function autoResize() {
       text = document.createTextNode(''),
       span = document.createElement('SPAN'),
       observe = function observe(element, event, handler) {
-    if (element.attachEvent) {
-      element.attachEvent('on' + event, handler);
-    } else {
-      element.addEventListener(event, handler, false);
-    }
+    element.addEventListener(event, handler, false);
   },
       _unObserve = function _unObserve(element, event, handler) {
-    if (element.removeEventListener) {
-      element.removeEventListener(event, handler, false);
-    } else {
-      element.detachEvent('on' + event, handler);
-    }
+    element.removeEventListener(event, handler, false);
   },
       resize = function resize(newChar) {
     var width, scrollHeight;
@@ -30737,7 +30927,6 @@ function autoResize() {
     extendDefaults(config);
 
     if (el.nodeName == 'TEXTAREA') {
-
       el.style.resize = 'none';
       el.style.overflowY = '';
       el.style.height = defaults.minHeight + 'px';
@@ -30753,6 +30942,9 @@ function autoResize() {
       observe(el, 'drop', delayedResize);
       observe(el, 'keydown', delayedResize);
       observe(el, 'focus', resize);
+      observe(el, 'compositionstart', delayedResize);
+      observe(el, 'compositionupdate', delayedResize);
+      observe(el, 'compositionend', delayedResize);
     }
 
     resize();
@@ -30773,6 +30965,9 @@ function autoResize() {
       _unObserve(el, 'drop', delayedResize);
       _unObserve(el, 'keydown', delayedResize);
       _unObserve(el, 'focus', resize);
+      _unObserve(el, 'compositionstart', delayedResize);
+      _unObserve(el, 'compositionupdate', delayedResize);
+      _unObserve(el, 'compositionend', delayedResize);
     },
     resize: resize
   };
@@ -30793,7 +30988,7 @@ exports.__esModule = true;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _baseEditor = __webpack_require__(54);
+var _baseEditor = __webpack_require__(55);
 
 var _baseEditor2 = _interopRequireDefault(_baseEditor);
 
@@ -30828,7 +31023,7 @@ var CheckboxEditor = function (_BaseEditor) {
       // are handled inside `checkboxRenderer`. Some events come here from `editorManager`. Below `if` statement was created by author
       // for purpose of handling only `doubleclick` event which may be done on a cell with checkbox.
 
-      if (event.type === 'mouseup') {
+      if (event && event.type === 'mouseup') {
         var checkbox = this.TD.querySelector('input[type="checkbox"]');
 
         if (!(0, _element.hasClass)(checkbox, 'htBadValue')) {
@@ -30877,7 +31072,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _moment = __webpack_require__(56);
+var _moment = __webpack_require__(57);
 
 var _moment2 = _interopRequireDefault(_moment);
 
@@ -30899,7 +31094,7 @@ var _unicode = __webpack_require__(21);
 
 var _event = __webpack_require__(13);
 
-var _textEditor = __webpack_require__(58);
+var _textEditor = __webpack_require__(59);
 
 var _textEditor2 = _interopRequireDefault(_textEditor);
 
@@ -31039,9 +31234,9 @@ var DateEditor = function (_TextEditor) {
       var _this3 = this;
 
       this._opened = false;
-      this.instance._registerTimeout(setTimeout(function () {
+      this.instance._registerTimeout(function () {
         _this3.instance._refreshBorders();
-      }, 0));
+      });
 
       _get(DateEditor.prototype.__proto__ || Object.getPrototypeOf(DateEditor.prototype), 'close', this).call(this);
     }
@@ -31287,7 +31482,7 @@ exports.default = DropdownEditor;
 
 exports.__esModule = true;
 
-var _textEditor = __webpack_require__(58);
+var _textEditor = __webpack_require__(59);
 
 var _textEditor2 = _interopRequireDefault(_textEditor);
 
@@ -31333,7 +31528,7 @@ var _get = function get(object, property, receiver) { if (object === null) objec
 
 var _element = __webpack_require__(0);
 
-var _textEditor = __webpack_require__(58);
+var _textEditor = __webpack_require__(59);
 
 var _textEditor2 = _interopRequireDefault(_textEditor);
 
@@ -31399,7 +31594,7 @@ var _event = __webpack_require__(13);
 
 var _unicode = __webpack_require__(21);
 
-var _baseEditor = __webpack_require__(54);
+var _baseEditor = __webpack_require__(55);
 
 var _baseEditor2 = _interopRequireDefault(_baseEditor);
 
@@ -32229,14 +32424,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function numericRenderer(instance, TD, row, col, prop, value, cellProperties) {
   if ((0, _number.isNumeric)(value)) {
     var numericFormat = cellProperties.numericFormat;
-    var cellCulture = numericFormat && numericFormat.culture;
+    var cellCulture = numericFormat && numericFormat.culture || '-';
     var cellFormatPattern = numericFormat && numericFormat.pattern;
     var className = cellProperties.className || '';
     var classArr = className.length ? className.split(' ') : [];
 
-    if (typeof cellCulture !== 'undefined') {
-      _numbro2.default.culture(cellCulture);
+    if (typeof cellCulture !== 'undefined' && !_numbro2.default.languages()[cellCulture]) {
+      var shortTag = cellCulture.replace('-', '');
+      var langData = _numbro2.default.allLanguages ? _numbro2.default.allLanguages[cellCulture] : _numbro2.default[shortTag];
+
+      if (langData) {
+        _numbro2.default.registerLanguage(langData);
+      }
     }
+
+    _numbro2.default.setLanguage(cellCulture);
 
     value = (0, _numbro2.default)(value).format(cellFormatPattern || '0');
 
@@ -32436,7 +32638,7 @@ exports.__esModule = true;
 exports.default = dateValidator;
 exports.correctFormat = correctFormat;
 
-var _moment = __webpack_require__(56);
+var _moment = __webpack_require__(57);
 
 var _moment2 = _interopRequireDefault(_moment);
 
@@ -32556,7 +32758,7 @@ function numericValidator(value, callback) {
 exports.__esModule = true;
 exports.default = timeValidator;
 
-var _moment = __webpack_require__(56);
+var _moment = __webpack_require__(57);
 
 var _moment2 = _interopRequireDefault(_moment);
 
@@ -33974,7 +34176,7 @@ var _eventManager = __webpack_require__(6);
 
 var _eventManager2 = _interopRequireDefault(_eventManager);
 
-var _baseEditor = __webpack_require__(54);
+var _baseEditor = __webpack_require__(55);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34038,7 +34240,9 @@ function EditorManager(instance, priv, selection) {
     }
     instance.runHooks('beforeKeyDown', event);
 
-    if (destroyed) {
+    // keyCode 229 aka 'uninitialized' doesn't take into account with editors. This key code is produced when unfinished
+    // character is entering (using IME editor). It is fired mainly on linux (ubuntu) with installed ibus-pinyin package.
+    if (destroyed || event.keyCode === 229) {
       return;
     }
     if ((0, _event.isImmediatePropagationStopped)(event)) {
@@ -34138,11 +34342,11 @@ function EditorManager(instance, priv, selection) {
 
       case _unicode.KEY_CODES.F2:
         /* F2 */
-        _this.openEditor(null, event);
-
         if (activeEditor) {
           activeEditor.enableFullEditMode();
         }
+        _this.openEditor(null, event);
+
         event.preventDefault(); // prevent Opera from opening 'Go to Page dialog'
         break;
 
@@ -34155,11 +34359,10 @@ function EditorManager(instance, priv, selection) {
           }
           moveSelectionAfterEnter(event.shiftKey);
         } else if (instance.getSettings().enterBeginsEditing) {
-          _this.openEditor(null, event);
-
           if (activeEditor) {
             activeEditor.enableFullEditMode();
           }
+          _this.openEditor(null, event);
         } else {
           moveSelectionAfterEnter(event.shiftKey);
         }
@@ -34170,6 +34373,8 @@ function EditorManager(instance, priv, selection) {
       case _unicode.KEY_CODES.ESCAPE:
         if (_this.isEditorOpened()) {
           _this.closeEditorAndRestoreOriginalValue(ctrlDown);
+
+          activeEditor.focus();
         }
         event.preventDefault();
         break;
@@ -34219,14 +34424,20 @@ function EditorManager(instance, priv, selection) {
       }
     });
 
+    // Open editor when text composition is started (IME editor)
+    eventManager.addEventListener(document.documentElement, 'compositionstart', function (event) {
+      if (!destroyed && activeEditor && !activeEditor.isOpened() && instance.isListening()) {
+        _this.openEditor('', event);
+      }
+    });
+
     function onDblClick(event, coords, elem) {
       // may be TD or TH
       if (elem.nodeName === 'TD') {
-        _this.openEditor(null, event);
-
         if (activeEditor) {
           activeEditor.enableFullEditMode();
         }
+        _this.openEditor(null, event);
       }
     }
     instance.view.wt.update('onCellDblClick', onDblClick);
@@ -34337,14 +34548,19 @@ function EditorManager(instance, priv, selection) {
    * @param {DOMEvent} event
    */
   this.openEditor = function (newInitialValue, event) {
-    if (activeEditor && !activeEditor.cellProperties.readOnly) {
-      activeEditor.beginEditing(newInitialValue, event);
-    } else if (activeEditor && activeEditor.cellProperties.readOnly) {
+    if (!activeEditor) {
+      return;
+    }
 
+    var readOnly = activeEditor.cellProperties.readOnly;
+
+    if (readOnly) {
       // move the selection after opening the editor with ENTER key
       if (event && event.keyCode === _unicode.KEY_CODES.ENTER) {
         moveSelectionAfterEnter();
       }
+    } else {
+      activeEditor.beginEditing(newInitialValue, event);
     }
   };
 
@@ -34479,7 +34695,7 @@ function TableView(instance) {
   instance.container.insertBefore(table, instance.container.firstChild);
 
   this.eventManager.addEventListener(instance.rootElement, 'mousedown', function (event) {
-    this.selectionMouseDown = true;
+    _this.selectionMouseDown = true;
 
     if (!that.isTextSelectionAllowed(event.target)) {
       clearTextSelection();
@@ -34488,11 +34704,14 @@ function TableView(instance) {
     }
   });
   this.eventManager.addEventListener(instance.rootElement, 'mouseup', function (event) {
-    this.selectionMouseDown = false;
+    _this.selectionMouseDown = false;
   });
   this.eventManager.addEventListener(instance.rootElement, 'mousemove', function (event) {
-    if (this.selectionMouseDown && !that.isTextSelectionAllowed(event.target)) {
-      clearTextSelection();
+    if (_this.selectionMouseDown && !that.isTextSelectionAllowed(event.target)) {
+      // Clear selection only when fragmentSelection is enabled, otherwise clearing selection breakes the IME editor.
+      if (_this.settings.fragmentSelection) {
+        clearTextSelection();
+      }
       event.preventDefault();
     }
   });
@@ -34518,6 +34737,12 @@ function TableView(instance) {
 
     if ((0, _element.isOutsideInput)(document.activeElement) || !instance.selection.isSelected() && !(0, _event.isRightClick)(event)) {
       instance.unlisten();
+    }
+  });
+
+  this.eventManager.addEventListener(document.documentElement, 'touchend', function () {
+    if (instance.selection.isInProgress()) {
+      instance.selection.finish();
     }
   });
 
@@ -34562,7 +34787,7 @@ function TableView(instance) {
     if (outsideClickDeselects) {
       instance.deselectCell();
     } else {
-      instance.destroyEditor();
+      instance.destroyEditor(false, false);
     }
   });
 
@@ -35184,6 +35409,8 @@ var DataSource = function () {
 
         if (typeof property === 'string') {
           row = (0, _object.getProperty)(row, property);
+        } else if (typeof property === 'function') {
+          row = property(row);
         } else {
           row = row[property];
         }
@@ -35723,7 +35950,7 @@ var _mixed = __webpack_require__(11);
 
 var _array = __webpack_require__(1);
 
-var _localHooks = __webpack_require__(59);
+var _localHooks = __webpack_require__(47);
 
 var _localHooks2 = _interopRequireDefault(_localHooks);
 
@@ -36629,7 +36856,7 @@ var _src = __webpack_require__(4);
 
 var _object = __webpack_require__(2);
 
-var _localHooks = __webpack_require__(59);
+var _localHooks = __webpack_require__(47);
 
 var _localHooks2 = _interopRequireDefault(_localHooks);
 
@@ -39737,6 +39964,8 @@ var ColumnSorting = function (_BasePlugin) {
       this.hot.runHooks('afterColumnSort', this.sortColumn, this.sortOrder);
 
       this.hot.render();
+      this.hot.view.wt.draw(true);
+
       this.saveSortingState();
     }
 
@@ -40673,7 +40902,7 @@ exports.default = RowsMapper;
 exports.__esModule = true;
 exports.default = dateSort;
 
-var _moment = __webpack_require__(56);
+var _moment = __webpack_require__(57);
 
 var _moment2 = _interopRequireDefault(_moment);
 
@@ -42126,7 +42355,7 @@ var _function = __webpack_require__(43);
 
 var _object = __webpack_require__(2);
 
-var _localHooks = __webpack_require__(59);
+var _localHooks = __webpack_require__(47);
 
 var _localHooks2 = _interopRequireDefault(_localHooks);
 
@@ -43891,7 +44120,7 @@ var _utils = __webpack_require__(19);
 
 var _unicode = __webpack_require__(21);
 
-var _localHooks = __webpack_require__(59);
+var _localHooks = __webpack_require__(47);
 
 var _localHooks2 = _interopRequireDefault(_localHooks);
 
@@ -44936,25 +45165,19 @@ var _number = __webpack_require__(5);
 
 var _plugins = __webpack_require__(8);
 
-var _textarea = __webpack_require__(319);
-
-var _textarea2 = _interopRequireDefault(_textarea);
-
-var _copy = __webpack_require__(320);
+var _copy = __webpack_require__(319);
 
 var _copy2 = _interopRequireDefault(_copy);
 
-var _cut = __webpack_require__(321);
+var _cut = __webpack_require__(320);
 
 var _cut2 = _interopRequireDefault(_cut);
 
-var _eventManager = __webpack_require__(6);
-
-var _eventManager2 = _interopRequireDefault(_eventManager);
-
-var _pasteEvent = __webpack_require__(322);
+var _pasteEvent = __webpack_require__(321);
 
 var _pasteEvent2 = _interopRequireDefault(_pasteEvent);
+
+var _focusableElement = __webpack_require__(323);
 
 __webpack_require__(324);
 
@@ -45000,20 +45223,14 @@ var CopyPaste = function (_BasePlugin) {
     _classCallCheck(this, CopyPaste);
 
     /**
-     * Event manager
-     *
-     * @type {EventManager}
-     */
-    var _this = _possibleConstructorReturn(this, (CopyPaste.__proto__ || Object.getPrototypeOf(CopyPaste)).call(this, hotInstance));
-
-    _this.eventManager = new _eventManager2.default(_this);
-    /**
      * Maximum number of columns than can be copied to clipboard using <kbd>CTRL</kbd> + <kbd>C</kbd>.
      *
      * @private
      * @type {Number}
      * @default 1000
      */
+    var _this = _possibleConstructorReturn(this, (CopyPaste.__proto__ || Object.getPrototypeOf(CopyPaste)).call(this, hotInstance));
+
     _this.columnsLimit = COLUMNS_LIMIT;
     /**
      * Ranges of the cells coordinates, which should be used to copy/cut/paste actions.
@@ -45041,14 +45258,6 @@ var CopyPaste = function (_BasePlugin) {
      * @default 1000
      */
     _this.rowsLimit = ROWS_LIMIT;
-    /**
-     * The `textarea` element which is necessary to process copying, cutting off and pasting.
-     *
-     * @private
-     * @type {HTMLElement}
-     * @default undefined
-     */
-    _this.textarea = void 0;
 
     privatePool.set(_this, {
       isTriggeredByCopy: false,
@@ -45087,7 +45296,6 @@ var CopyPaste = function (_BasePlugin) {
       var settings = this.hot.getSettings();
       var priv = privatePool.get(this);
 
-      this.textarea = _textarea2.default.getSingleton();
       priv.isFragmentSelectionEnabled = settings.fragmentSelection;
 
       if (_typeof(settings.copyPaste) === 'object') {
@@ -45103,7 +45311,14 @@ var CopyPaste = function (_BasePlugin) {
         return _this2.onAfterSelectionEnd();
       });
 
-      this.registerEvents();
+      this.focusableElement = (0, _focusableElement.createElement)();
+      this.focusableElement.addLocalHook('copy', function (event) {
+        return _this2.onCopy(event);
+      }).addLocalHook('cut', function (event) {
+        return _this2.onCut(event);
+      }).addLocalHook('paste', function (event) {
+        return _this2.onPaste(event);
+      });
 
       _get(CopyPaste.prototype.__proto__ || Object.getPrototypeOf(CopyPaste.prototype), 'enablePlugin', this).call(this);
     }
@@ -45128,8 +45343,8 @@ var CopyPaste = function (_BasePlugin) {
   }, {
     key: 'disablePlugin',
     value: function disablePlugin() {
-      if (this.textarea) {
-        this.textarea.destroy();
+      if (this.focusableElement) {
+        (0, _focusableElement.destroyElement)(this.focusableElement);
       }
 
       _get(CopyPaste.prototype.__proto__ || Object.getPrototypeOf(CopyPaste.prototype), 'disablePlugin', this).call(this);
@@ -45273,8 +45488,7 @@ var CopyPaste = function (_BasePlugin) {
       var priv = privatePool.get(this);
 
       priv.isTriggeredByCopy = true;
-
-      this.textarea.select();
+      this.focusableElement.focus();
       document.execCommand('copy');
     }
 
@@ -45288,8 +45502,7 @@ var CopyPaste = function (_BasePlugin) {
       var priv = privatePool.get(this);
 
       priv.isTriggeredByCut = true;
-
-      this.textarea.select();
+      this.focusableElement.focus();
       document.execCommand('cut');
     }
 
@@ -45305,31 +45518,9 @@ var CopyPaste = function (_BasePlugin) {
       var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 
       var pasteData = new _pasteEvent2.default();
+
       pasteData.clipboardData.setData('text/plain', value);
-
       this.onPaste(pasteData);
-    }
-
-    /**
-     * Register event listeners.
-     *
-     * @private
-     */
-
-  }, {
-    key: 'registerEvents',
-    value: function registerEvents() {
-      var _this5 = this;
-
-      this.eventManager.addEventListener(this.textarea.element, 'paste', function (event) {
-        return _this5.onPaste(event);
-      });
-      this.eventManager.addEventListener(this.textarea.element, 'cut', function (event) {
-        return _this5.onCut(event);
-      });
-      this.eventManager.addEventListener(this.textarea.element, 'copy', function (event) {
-        return _this5.onCopy(event);
-      });
     }
 
     /**
@@ -45345,6 +45536,12 @@ var CopyPaste = function (_BasePlugin) {
       var priv = privatePool.get(this);
 
       if (!this.hot.isListening() && !priv.isTriggeredByCopy) {
+        return;
+      }
+
+      var editor = this.hot.getActiveEditor();
+
+      if (editor && editor.isOpened()) {
         return;
       }
 
@@ -45386,6 +45583,12 @@ var CopyPaste = function (_BasePlugin) {
         return;
       }
 
+      var editor = this.hot.getActiveEditor();
+
+      if (editor && editor.isOpened()) {
+        return;
+      }
+
       this.setCopyableText();
       priv.isTriggeredByCut = false;
 
@@ -45419,25 +45622,32 @@ var CopyPaste = function (_BasePlugin) {
   }, {
     key: 'onPaste',
     value: function onPaste(event) {
-      var _this6 = this;
+      var _this5 = this;
 
       if (!this.hot.isListening()) {
         return;
       }
+
+      var editor = this.hot.getActiveEditor();
+
+      if (editor && editor.isOpened()) {
+        return;
+      }
+
       if (event && event.preventDefault) {
         event.preventDefault();
       }
 
       var inputArray = void 0;
+      var pastedData = void 0;
 
       if (event && typeof event.clipboardData !== 'undefined') {
-        this.textarea.setValue(event.clipboardData.getData('text/plain'));
+        pastedData = event.clipboardData.getData('text/plain');
       } else if (typeof ClipboardEvent === 'undefined' && typeof window.clipboardData !== 'undefined') {
-        this.textarea.setValue(window.clipboardData.getData('Text'));
+        pastedData = window.clipboardData.getData('Text');
       }
 
-      inputArray = _SheetClip2.default.parse(this.textarea.getValue());
-      this.textarea.setValue(' ');
+      inputArray = _SheetClip2.default.parse(pastedData);
 
       if (inputArray.length === 0) {
         return;
@@ -45481,7 +45691,7 @@ var CopyPaste = function (_BasePlugin) {
               }
             }
           });
-          _this6.hot.selectCell(areaStart.row, areaStart.col, areaEnd.row + offset.row, areaEnd.col + offset.col);
+          _this5.hot.selectCell(areaStart.row, areaStart.col, areaEnd.row + offset.row, areaEnd.col + offset.col);
         }
       });
 
@@ -45513,18 +45723,29 @@ var CopyPaste = function (_BasePlugin) {
   }, {
     key: 'onAfterSelectionEnd',
     value: function onAfterSelectionEnd() {
-      var priv = privatePool.get(this);
+      var _privatePool$get = privatePool.get(this),
+          isFragmentSelectionEnabled = _privatePool$get.isFragmentSelectionEnabled;
+
       var editor = this.hot.getActiveEditor();
 
-      if (editor && typeof editor.isOpened !== 'undefined' && editor.isOpened()) {
+      if (editor && editor.isOpened()) {
         return;
       }
-      if (priv.isFragmentSelectionEnabled && !this.textarea.isActive() && (0, _element.getSelectionText)()) {
+
+      var editableElement = editor ? editor.TEXTAREA : void 0;
+
+      if (editableElement) {
+        this.focusableElement.setFocusableElement(editableElement);
+      } else {
+        this.focusableElement.useSecondaryElement();
+      }
+
+      if (isFragmentSelectionEnabled && this.focusableElement.getFocusableElement() !== document.activeElement && (0, _element.getSelectionText)()) {
         return;
       }
 
       this.setCopyableText();
-      this.textarea.select();
+      this.focusableElement.focus();
     }
 
     /**
@@ -45534,8 +45755,9 @@ var CopyPaste = function (_BasePlugin) {
   }, {
     key: 'destroy',
     value: function destroy() {
-      if (this.textarea) {
-        this.textarea.destroy();
+      if (this.focusableElement) {
+        (0, _focusableElement.destroyElement)(this.focusableElement);
+        this.focusableElement = null;
       }
 
       _get(CopyPaste.prototype.__proto__ || Object.getPrototypeOf(CopyPaste.prototype), 'destroy', this).call(this);
@@ -45551,191 +45773,6 @@ exports.default = CopyPaste;
 
 /***/ }),
 /* 319 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * @class Textarea
- *
- * @plugin CopyPaste
- */
-var Textarea = function () {
-  _createClass(Textarea, null, [{
-    key: 'getSingleton',
-    value: function getSingleton() {
-      globalSingleton.append();
-
-      return globalSingleton;
-    }
-  }]);
-
-  function Textarea() {
-    _classCallCheck(this, Textarea);
-
-    /**
-     * Main textarea element.
-     *
-     * @type {HTMLElement}
-     */
-    this.element = void 0;
-    /**
-     * Store information about append to the document.body.
-     *
-     * @type {Boolean}
-     */
-    this.isAppended = false;
-    /**
-     * Reference counter.
-     *
-     * @type {Number}
-     */
-    this.refCounter = 0;
-  }
-
-  /**
-   * Apends textarea element to the `body`
-   */
-
-
-  _createClass(Textarea, [{
-    key: 'append',
-    value: function append() {
-      if (this.hasBeenDestroyed()) {
-        this.create();
-      }
-
-      this.refCounter++;
-
-      if (!this.isAppended && document.body) {
-        if (document.body) {
-          this.isAppended = true;
-          document.body.appendChild(this.element);
-        }
-      }
-    }
-
-    /**
-     * Prepares textarea element with proper attributes.
-     */
-
-  }, {
-    key: 'create',
-    value: function create() {
-      this.element = document.createElement('textarea');
-      this.element.id = 'HandsontableCopyPaste';
-      this.element.className = 'copyPaste';
-      this.element.tabIndex = -1;
-      this.element.autocomplete = 'off';
-      this.element.wrap = 'hard';
-      this.element.value = ' ';
-    }
-
-    /**
-     * Deselects textarea element if is active.
-     */
-
-  }, {
-    key: 'deselect',
-    value: function deselect() {
-      if (this.element === document.activeElement) {
-        document.activeElement.blur();
-      }
-    }
-
-    /**
-     * Destroy instance
-     */
-
-  }, {
-    key: 'destroy',
-    value: function destroy() {
-      this.refCounter--;
-      this.refCounter = this.refCounter < 0 ? 0 : this.refCounter;
-
-      if (this.hasBeenDestroyed() && this.element && this.element.parentNode) {
-        this.element.parentNode.removeChild(this.element);
-        this.element = null;
-        this.isAppended = false;
-      }
-    }
-
-    /**
-     * Getter for the element.
-     *
-     * @returns {String}
-     */
-
-  }, {
-    key: 'getValue',
-    value: function getValue() {
-      return this.element.value;
-    }
-
-    /**
-     * Check if instance has been destroyed
-     *
-     * @returns {Boolean}
-     */
-
-  }, {
-    key: 'hasBeenDestroyed',
-    value: function hasBeenDestroyed() {
-      return this.refCounter < 1;
-    }
-
-    /**
-     * Check if the element is an active element in frame.
-     *
-     * @returns {Boolean}
-     */
-
-  }, {
-    key: 'isActive',
-    value: function isActive() {
-      return this.element === document.activeElement;
-    }
-
-    /**
-     * Sets focus on the element and select content.
-     */
-
-  }, {
-    key: 'select',
-    value: function select() {
-      this.element.focus();
-      this.element.select();
-    }
-
-    /**
-     * Setter for the element.
-     *
-     * @param {String} data Value which should be insert into the element.
-     */
-
-  }, {
-    key: 'setValue',
-    value: function setValue(data) {
-      this.element.value = data;
-    }
-  }]);
-
-  return Textarea;
-}();
-
-var globalSingleton = new Textarea();
-
-exports.default = Textarea;
-
-/***/ }),
-/* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45774,7 +45811,7 @@ function copyItem(copyPastePlugin) {
 }
 
 /***/ }),
-/* 321 */
+/* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45813,7 +45850,7 @@ function cutItem(copyPastePlugin) {
 }
 
 /***/ }),
-/* 322 */
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45821,7 +45858,7 @@ function cutItem(copyPastePlugin) {
 
 exports.__esModule = true;
 
-var _clipboardData = __webpack_require__(323);
+var _clipboardData = __webpack_require__(322);
 
 var _clipboardData2 = _interopRequireDefault(_clipboardData);
 
@@ -45838,7 +45875,7 @@ var PasteEvent = function PasteEvent() {
 exports.default = PasteEvent;
 
 /***/ }),
-/* 323 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45873,6 +45910,230 @@ var ClipboardData = function () {
 }();
 
 exports.default = ClipboardData;
+
+/***/ }),
+/* 323 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+exports.destroyElement = exports.deactivateElement = exports.createElement = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _eventManager = __webpack_require__(6);
+
+var _eventManager2 = _interopRequireDefault(_eventManager);
+
+var _localHooks = __webpack_require__(47);
+
+var _localHooks2 = _interopRequireDefault(_localHooks);
+
+var _object = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * @class FocusableWrapper
+ *
+ * @plugin CopyPaste
+ */
+var FocusableWrapper = function () {
+  function FocusableWrapper() {
+    _classCallCheck(this, FocusableWrapper);
+
+    /**
+     * The main/operational focusable element.
+     *
+     * @type {HTMLElement}
+     */
+    this.mainElement = null;
+    /**
+     * Instance of EventManager.
+     *
+     * @type {EventManager}
+     */
+    this.eventManager = new _eventManager2.default(this);
+    /**
+     * An object for tracking information about event listeners attached to the focusable element.
+     *
+     * @type {WeakSet}
+     */
+    this.listenersCount = new WeakSet();
+  }
+
+  /**
+   * Switch to the secondary focusable element. Used when no any main focusable element is provided.
+   */
+
+
+  _createClass(FocusableWrapper, [{
+    key: 'useSecondaryElement',
+    value: function useSecondaryElement() {
+      var el = createOrGetSecondaryElement();
+
+      if (!this.listenersCount.has(el)) {
+        this.listenersCount.add(el);
+        forwardEventsToLocalHooks(this.eventManager, el, this);
+      }
+
+      this.mainElement = el;
+    }
+
+    /**
+     * Switch to the main focusable element.
+     */
+
+  }, {
+    key: 'setFocusableElement',
+    value: function setFocusableElement(element) {
+      if (!this.listenersCount.has(element)) {
+        this.listenersCount.add(element);
+        forwardEventsToLocalHooks(this.eventManager, element, this);
+      }
+
+      this.mainElement = element;
+    }
+
+    /**
+     * Get currently set focusable element.
+     *
+     * @return {HTMLElement}
+     */
+
+  }, {
+    key: 'getFocusableElement',
+    value: function getFocusableElement() {
+      return this.mainElement;
+    }
+
+    /**
+     * Set focus to the focusable element.
+     */
+
+  }, {
+    key: 'focus',
+    value: function focus() {
+      // Add an empty space to texarea. It is necessary for safari to enable "copy" command from menu bar.
+      this.mainElement.value = ' ';
+      this.mainElement.select();
+    }
+  }]);
+
+  return FocusableWrapper;
+}();
+
+(0, _object.mixin)(FocusableWrapper, _localHooks2.default);
+
+var refCounter = 0;
+
+/**
+ * Create and return the FocusableWrapper instance.
+ *
+ * @return {FocusableWrapper}
+ */
+function createElement() {
+  var focusableWrapper = new FocusableWrapper();
+
+  refCounter += 1;
+
+  return focusableWrapper;
+}
+
+/**
+ * Deactivate the FocusableWrapper instance.
+ *
+ * @param {FocusableWrapper} wrapper
+ */
+function deactivateElement(wrapper) {
+  wrapper.eventManager.clear();
+}
+
+/**
+ * Destroy the FocusableWrapper instance.
+ *
+ * @param {FocusableWrapper} wrapper
+ */
+function destroyElement(wrapper) {
+  if (!(wrapper instanceof FocusableWrapper)) {
+    return;
+  }
+
+  if (refCounter > 0) {
+    refCounter -= 1;
+  }
+
+  deactivateElement(wrapper);
+
+  if (refCounter <= 0) {
+    refCounter = 0;
+
+    // Detach secondary element from the DOM.
+    if (secondaryElement && secondaryElement.parentNode) {
+      secondaryElement.parentNode.removeChild(secondaryElement);
+      secondaryElement = null;
+    }
+    wrapper.mainElement = null;
+  }
+}
+
+var runLocalHooks = function runLocalHooks(eventName, subject) {
+  return function (event) {
+    return subject.runLocalHooks(eventName, event);
+  };
+};
+
+/**
+ * Register copy/cut/paste events and forward their actions to the subject local hooks system.
+ *
+ * @param {HTMLElement} element
+ * @param {FocusableWrapper} subject
+ */
+function forwardEventsToLocalHooks(eventManager, element, subject) {
+  eventManager.addEventListener(element, 'copy', runLocalHooks('copy', subject));
+  eventManager.addEventListener(element, 'cut', runLocalHooks('cut', subject));
+  eventManager.addEventListener(element, 'paste', runLocalHooks('paste', subject));
+}
+
+var secondaryElement = void 0;
+
+/**
+ * Create and attach newly created focusable element to the DOM.
+ *
+ * @return {HTMLElement}
+ */
+function createOrGetSecondaryElement(subject) {
+  if (secondaryElement) {
+
+    if (!secondaryElement.parentElement) {
+      document.body.appendChild(secondaryElement);
+    }
+
+    return secondaryElement;
+  }
+
+  var element = document.createElement('textarea');
+
+  secondaryElement = element;
+  element.id = 'HandsontableCopyPaste';
+  element.className = 'copyPaste';
+  element.tabIndex = -1;
+  element.autocomplete = 'off';
+  element.wrap = 'hard';
+  element.value = ' ';
+
+  document.body.appendChild(element);
+
+  return element;
+}
+
+exports.createElement = createElement;
+exports.deactivateElement = deactivateElement;
+exports.destroyElement = destroyElement;
 
 /***/ }),
 /* 324 */
@@ -45935,7 +46196,7 @@ var _top = __webpack_require__(330);
 
 var _top2 = _interopRequireDefault(_top);
 
-var _utils = __webpack_require__(47);
+var _utils = __webpack_require__(48);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -46477,7 +46738,7 @@ var _constants = __webpack_require__(7);
 
 var C = _interopRequireWildcard(_constants);
 
-var _utils = __webpack_require__(47);
+var _utils = __webpack_require__(48);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -46513,7 +46774,7 @@ var _constants = __webpack_require__(7);
 
 var C = _interopRequireWildcard(_constants);
 
-var _utils = __webpack_require__(47);
+var _utils = __webpack_require__(48);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -46550,7 +46811,7 @@ var _constants = __webpack_require__(7);
 
 var C = _interopRequireWildcard(_constants);
 
-var _utils = __webpack_require__(47);
+var _utils = __webpack_require__(48);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -46583,7 +46844,7 @@ var _constants = __webpack_require__(7);
 
 var C = _interopRequireWildcard(_constants);
 
-var _utils = __webpack_require__(47);
+var _utils = __webpack_require__(48);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -46619,7 +46880,7 @@ var _constants = __webpack_require__(7);
 
 var C = _interopRequireWildcard(_constants);
 
-var _utils = __webpack_require__(47);
+var _utils = __webpack_require__(48);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -49236,8 +49497,6 @@ __webpack_require__(346);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -49261,14 +49520,17 @@ var CSS_AFTER_SELECTION = 'after-selection--rows';
  * This plugin allows to change rows order.
  *
  * API:
- * - moveRow - move single row to the new position.
- * - moveRows - move many rows (as an array of indexes) to the new position.
+ * - `moveRow` - move single row to the new position.
+ * - `moveRows` - move many rows (as an array of indexes) to the new position.
+ * - `dragRow` - drag single row to the new position.
+ * - `dragRows` - drag many rows (as an array of indexes) to the new position.
  *
- * If you want apply visual changes, you have to call manually the render() method on the instance of handsontable.
+ * [Documentation](/demo-moving.html#manualRowMove) explain differences between drag and move actions. Please keep in mind that if you want apply visual changes,
+ * you have to call manually the `render` method on the instance of Handsontable.
  *
  * UI components:
- * - backlight - highlight of selected rows.
- * - guideline - line which shows where rows has been moved.
+ * - `backlight` - highlight of selected rows.
+ * - `guideline` - line which shows where rows has been moved.
  *
  * @class ManualRowMove
  * @plugin ManualRowMove
@@ -49288,18 +49550,19 @@ var ManualRowMove = function (_BasePlugin) {
     privatePool.set(_this, {
       rowsToMove: [],
       pressed: void 0,
-      disallowMoving: void 0,
       target: {
         eventPageY: void 0,
         coords: void 0,
         TD: void 0,
         row: void 0
-      }
+      },
+      cachedDropIndex: void 0
     });
 
     /**
      * List of last removed row indexes.
      *
+     * @private
      * @type {Array}
      */
     _this.removedRows = [];
@@ -49380,9 +49643,6 @@ var ManualRowMove = function (_BasePlugin) {
       this.addHook('afterLoadData', function () {
         return _this2.onAfterLoadData();
       });
-      this.addHook('beforeColumnSort', function (column, order) {
-        return _this2.onBeforeColumnSort(column, order);
-      });
       this.addHook('unmodifyRow', function (row) {
         return _this2.onUnmodifyRow(row);
       });
@@ -49433,56 +49693,152 @@ var ManualRowMove = function (_BasePlugin) {
     }
 
     /**
-     * Move a single row.
+     * Move a single row to final index position.
      *
      * @param {Number} row Visual row index to be moved.
-     * @param {Number} target Visual row index being a target for the moved row.
+     * @param {Number} finalIndex Visual row index, being a start index for the moved rows. Points to where the elements will be placed after the moving action.
+     * To check the visualization of the final index, please take a look at [documentation](/demo-moving.html#manualRowMove).
      */
 
   }, {
     key: 'moveRow',
-    value: function moveRow(row, target) {
-      this.moveRows([row], target);
+    value: function moveRow(row, finalIndex) {
+      this.moveRows([row], finalIndex);
     }
 
     /**
-     * Move multiple rows.
+     * Move multiple rows to final index position.
      *
      * @param {Array} rows Array of visual row indexes to be moved.
-     * @param {Number} target Visual row index being a target for the moved rows.
+     * @param {Number} finalIndex Visual row index, being a start index for the moved rows. Points to where the elements will be placed after the moving action.
+     * To check the visualization of the final index, please take a look at [documentation](/demo-moving.html#manualRowMove).
      */
 
   }, {
     key: 'moveRows',
-    value: function moveRows(rows, target) {
-      var _this3 = this;
-
-      var visualRows = [].concat(_toConsumableArray(rows));
+    value: function moveRows(rows, finalIndex) {
       var priv = privatePool.get(this);
-      var beforeMoveHook = this.hot.runHooks('beforeRowMove', visualRows, target);
+      var dropIndex = priv.cachedDropIndex;
+      var movePossible = this.isMovePossible(rows, finalIndex);
+      var beforeMoveHook = this.hot.runHooks('beforeRowMove', rows, finalIndex, dropIndex, movePossible);
 
-      priv.disallowMoving = beforeMoveHook === false;
+      priv.cachedDropIndex = void 0;
 
-      if (!priv.disallowMoving) {
-        // first we need to rewrite an visual indexes to physical for save reference after move
-        (0, _array.arrayEach)(rows, function (row, index, array) {
-          array[index] = _this3.rowsMapper.getValueByIndex(row);
-        });
-
-        // next, when we have got an physical indexes, we can move rows
-        (0, _array.arrayEach)(rows, function (row, index) {
-          var actualPosition = _this3.rowsMapper.getIndexByValue(row);
-
-          if (actualPosition !== target) {
-            _this3.rowsMapper.moveRow(actualPosition, target + index);
-          }
-        });
-
-        // after moving we have to clear rowsMapper from null entries
-        this.rowsMapper.clearNull();
+      if (beforeMoveHook === false) {
+        return;
       }
 
-      this.hot.runHooks('afterRowMove', visualRows, target);
+      if (movePossible) {
+        this.rowsMapper.moveItems(rows, finalIndex);
+      }
+
+      this.hot.runHooks('afterRowMove', rows, finalIndex, dropIndex, movePossible, movePossible && this.isRowOrderChanged(rows, finalIndex));
+    }
+
+    /**
+     * Drag a single row to drop index position.
+     *
+     * @param {Number} row Visual row index to be dragged.
+     * @param {Number} dropIndex Visual row index, being a drop index for the moved rows. Points to where we are going to drop the moved elements.
+     * To check visualization of drop index please take a look at [documentation](/demo-moving.html#manualRowMove).
+     */
+
+  }, {
+    key: 'dragRow',
+    value: function dragRow(row, dropIndex) {
+      this.dragRows([row], dropIndex);
+    }
+
+    /**
+     * Drag multiple rows to drop index position.
+     *
+     * @param {Array} rows Array of visual row indexes to be dragged.
+     * @param {Number} dropIndex Visual row index, being a drop index for the moved rows. Points to where we are going to drop the moved elements.
+     * To check visualization of drop index please take a look at [documentation](/demo-moving.html#manualRowMove).
+     */
+
+  }, {
+    key: 'dragRows',
+    value: function dragRows(rows, dropIndex) {
+      var finalIndex = this.countFinalIndex(rows, dropIndex);
+      var priv = privatePool.get(this);
+
+      priv.cachedDropIndex = dropIndex;
+
+      this.moveRows(rows, finalIndex);
+    }
+
+    /**
+     * Indicates if it's possible to move rows to the desired position. Some of the actions aren't possible, i.e. you can’t move more than one element to the last position.
+     *
+     * @param {Array} movedRows Array of visual row indexes to be moved.
+     * @param {Number} finalIndex Visual row index, being a start index for the moved rows. Points to where the elements will be placed after the moving action.
+     * To check the visualization of the final index, please take a look at [documentation](/demo-moving.html#manualRowMove).
+     * @returns {Boolean}
+     */
+
+  }, {
+    key: 'isMovePossible',
+    value: function isMovePossible(movedRows, finalIndex) {
+      var _this3 = this;
+
+      // An attempt to transfer more rows to start destination than is possible (only when moving from the top to the bottom).
+      var tooHighDestinationIndex = movedRows.length + finalIndex > this.rowsMapper._arrayMap.length;
+
+      var tooLowDestinationIndex = finalIndex < 0;
+      var tooLowMovedRowIndex = movedRows.some(function (movedRow) {
+        return movedRow < 0;
+      });
+      var tooHighMovedRowIndex = movedRows.some(function (movedRow) {
+        return movedRow >= _this3.rowsMapper._arrayMap.length;
+      });
+
+      if (tooHighDestinationIndex || tooLowDestinationIndex || tooLowMovedRowIndex || tooHighMovedRowIndex) {
+        return false;
+      }
+
+      return true;
+    }
+
+    /**
+     * Indicates if order of rows was changed.
+     *
+     * @private
+     * @param {Array} movedRows Array of visual row indexes to be moved.
+     * @param {Number} finalIndex Visual row index, being a start index for the moved rows. Points to where the elements will be placed after the moving action.
+     * To check the visualization of the final index, please take a look at [documentation](/demo-moving.html#manualRowMove).
+     * @returns {Boolean}
+     */
+
+  }, {
+    key: 'isRowOrderChanged',
+    value: function isRowOrderChanged(movedRows, finalIndex) {
+      return movedRows.some(function (row, nrOfMovedElement) {
+        return row - nrOfMovedElement !== finalIndex;
+      });
+    }
+
+    /**
+     * Count the final row index from the drop index.
+     *
+     * @private
+     * @param {Array} movedRows Array of visual row indexes to be moved.
+     * @param {Number} dropIndex Visual row index, being a drop index for the moved rows.
+     * @returns {Number} Visual row index, being a start index for the moved rows.
+     */
+
+  }, {
+    key: 'countFinalIndex',
+    value: function countFinalIndex(movedRows, dropIndex) {
+      var numberOfRowsLowerThanDropIndex = (0, _array.arrayReduce)(movedRows, function (numberOfRows, currentRowIndex) {
+        if (currentRowIndex < dropIndex) {
+          numberOfRows += 1;
+        }
+
+        return numberOfRows;
+      }, 0);
+
+      return dropIndex - numberOfRowsLowerThanDropIndex;
     }
 
     /**
@@ -49780,22 +50136,6 @@ var ManualRowMove = function (_BasePlugin) {
     }
 
     /**
-     * `beforeColumnSort` hook callback. If user uses the sorting, manual row moving is disabled.
-     *
-     * @private
-     * @param {Number} column Column index where soring is present
-     * @param {*} order State of sorting. ASC/DESC/None
-     */
-
-  }, {
-    key: 'onBeforeColumnSort',
-    value: function onBeforeColumnSort(column, order) {
-      var priv = privatePool.get(this);
-
-      priv.disallowMoving = order !== void 0;
-    }
-
-    /**
      * Change the behavior of selection / dragging.
      *
      * @private
@@ -49943,20 +50283,21 @@ var ManualRowMove = function (_BasePlugin) {
         (0, _element.addClass)(this.hot.rootElement, CSS_AFTER_SELECTION);
       }
 
-      if (rowsLen < 1 || target === void 0 || priv.rowsToMove.indexOf(target) > -1 || priv.rowsToMove[rowsLen - 1] === target - 1) {
+      if (rowsLen < 1 || target === void 0) {
         return;
       }
 
-      this.moveRows(priv.rowsToMove, target);
+      var firstMovedVisualRow = priv.rowsToMove[0];
+      var firstMovedPhysicalRow = this.rowsMapper.getValueByIndex(firstMovedVisualRow);
+
+      this.dragRows(priv.rowsToMove, target);
 
       this.persistentStateSave();
       this.hot.render();
 
-      if (!priv.disallowMoving) {
-        var selectionStart = this.rowsMapper.getIndexByValue(priv.rowsToMove[0]);
-        var selectionEnd = this.rowsMapper.getIndexByValue(priv.rowsToMove[rowsLen - 1]);
-        this.changeSelection(selectionStart, selectionEnd);
-      }
+      var selectionStart = this.rowsMapper.getIndexByValue(firstMovedPhysicalRow);
+      var selectionEnd = selectionStart + rowsLen - 1;
+      this.changeSelection(selectionStart, selectionEnd);
 
       priv.rowsToMove.length = 0;
     }
@@ -50182,33 +50523,6 @@ var RowsMapper = function () {
     key: 'destroy',
     value: function destroy() {
       this._arrayMap = null;
-    }
-
-    /**
-     *
-     * Moving elements in rowsMapper.
-     * @param {Number} from Row index to move.
-     * @param {Number} to Target index.
-     */
-
-  }, {
-    key: 'moveRow',
-    value: function moveRow(from, to) {
-      var indexToMove = this._arrayMap[from];
-      this._arrayMap[from] = null;
-      this._arrayMap.splice(to, 0, indexToMove);
-    }
-
-    /**
-     * Clearing arrayMap from `null` entries.
-     */
-
-  }, {
-    key: 'clearNull',
-    value: function clearNull() {
-      this._arrayMap = (0, _array.arrayFilter)(this._arrayMap, function (i) {
-        return i !== null;
-      });
     }
   }]);
 
@@ -50985,7 +51299,7 @@ var _array = __webpack_require__(1);
 
 var _object = __webpack_require__(2);
 
-var _console = __webpack_require__(57);
+var _console = __webpack_require__(58);
 
 var _number = __webpack_require__(5);
 
@@ -52186,7 +52500,7 @@ var _index = __webpack_require__(4);
 
 var _number = __webpack_require__(5);
 
-var _console = __webpack_require__(57);
+var _console = __webpack_require__(58);
 
 var _array = __webpack_require__(1);
 
@@ -54082,7 +54396,7 @@ var _jsonPatchDuplex = __webpack_require__(205);
 
 var _jsonPatchDuplex2 = _interopRequireDefault(_jsonPatchDuplex);
 
-var _localHooks = __webpack_require__(59);
+var _localHooks = __webpack_require__(47);
 
 var _localHooks2 = _interopRequireDefault(_localHooks);
 
@@ -55095,12 +55409,12 @@ function UndoRedo(instance) {
     plugin.done(new UndoRedo.FiltersAction(conditionsStack));
   });
 
-  instance.addHook('beforeRowMove', function (movedRows, target) {
-    if (movedRows === false) {
+  instance.addHook('beforeRowMove', function (rows, finalIndex) {
+    if (rows === false) {
       return;
     }
 
-    plugin.done(new UndoRedo.RowMoveAction(movedRows, target));
+    plugin.done(new UndoRedo.RowMoveAction(rows, finalIndex));
   });
 
   instance.addHook('beforeMergeCells', function (cellRange, auto) {
@@ -55561,40 +55875,54 @@ UndoRedo.UnmergeCellsAction = UnmergeCellsAction;
  * ManualRowMove action.
  * @TODO: removeRow undo should works on logical index
  */
-UndoRedo.RowMoveAction = function (movedRows, target) {
-  this.rows = movedRows.slice();
-  this.target = target;
+UndoRedo.RowMoveAction = function (rows, finalIndex) {
+  this.rows = rows.slice();
+  this.finalIndex = finalIndex;
 };
 (0, _object.inherit)(UndoRedo.RowMoveAction, UndoRedo.Action);
 
 UndoRedo.RowMoveAction.prototype.undo = function (instance, undoneCallback) {
+  var _this5 = this;
+
   var manualRowMove = instance.getPlugin('manualRowMove');
+  var copyOfRows = [].concat(this.rows);
+  var rowsMovedUp = copyOfRows.filter(function (a) {
+    return a > _this5.finalIndex;
+  });
+  var rowsMovedDown = copyOfRows.filter(function (a) {
+    return a <= _this5.finalIndex;
+  });
+  var allMovedRows = rowsMovedUp.sort(function (a, b) {
+    return b - a;
+  }).concat(rowsMovedDown.sort(function (a, b) {
+    return a - b;
+  }));
 
   instance.addHookOnce('afterRender', undoneCallback);
 
-  var mod = this.rows[0] < this.target ? -1 * this.rows.length : 0;
-  var newTarget = this.rows[0] > this.target ? this.rows[0] + this.rows.length : this.rows[0];
-  var newRows = [];
-  var rowsLen = this.rows.length + mod;
+  // Moving rows from those with higher indexes to those with lower indexes when action was performed from bottom to top
+  // Moving rows from those with lower indexes to those with higher indexes when action was performed from top to bottom
+  for (var i = 0; i < allMovedRows.length; i += 1) {
+    var newPhysicalRow = manualRowMove.rowsMapper.getIndexByValue(allMovedRows[i]);
 
-  for (var i = mod; i < rowsLen; i += 1) {
-    newRows.push(this.target + i);
+    manualRowMove.moveRow(newPhysicalRow, allMovedRows[i]);
   }
 
-  manualRowMove.moveRows(newRows.slice(), newTarget);
   instance.render();
 
-  instance.selectCell(this.rows[0], 0, this.rows[this.rows.length - 1], instance.countCols() - 1, false, false);
+  instance.deselectCell();
+  instance.selectRows(this.rows[0], this.rows[0] + this.rows.length - 1);
 };
 UndoRedo.RowMoveAction.prototype.redo = function (instance, redoneCallback) {
   var manualRowMove = instance.getPlugin('manualRowMove');
 
   instance.addHookOnce('afterRender', redoneCallback);
-  manualRowMove.moveRows(this.rows.slice(), this.target);
-  instance.render();
-  var startSelection = this.rows[0] < this.target ? this.target - this.rows.length : this.target;
 
-  instance.selectCell(startSelection, 0, startSelection + this.rows.length - 1, instance.countCols() - 1, false, false);
+  manualRowMove.moveRows(this.rows.slice(), this.finalIndex);
+  instance.render();
+
+  instance.deselectCell();
+  instance.selectRows(this.finalIndex, this.finalIndex + this.rows.length - 1);
 };
 
 function init() {
